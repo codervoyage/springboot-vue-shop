@@ -1,26 +1,36 @@
 <template>
   <el-container id="ce">
     <!--========侧边栏===========-->
-    <el-aside width="210px">
+    <el-aside :width="isCollapse ? '64px' : '210px' ">
       <el-row class="tac">
-        <el-col :span="12">
           <el-menu
-              default-active="1"
-              class="el-menu-vertical-demo"
-              @open="handleOpen"
-              @close="handleClose"
               background-color="#304156"
               text-color="#fff"
-              router="router"
-              active-text-color="#ffd04b">
+              
+              router
+              active-text-color="#ffd04b"
+              :collapse="isCollapse"
+              :collapse-transition="false"
+              :default-active="this.$route.path"
+
+          >
+            <!--==========一级目录==============-->
+            <el-submenu v-for="(item,index) in menuList" :key="item.id" :index="item.id+''">
+              <template slot="title" v-if="item.id!=0">
+                <!-- <i :class="icons[index]"></i>-->
+                <span>{{ item.menu }}</span>
+              </template>
+              <!--=======二级目录========-->
+              <el-menu-item v-for="subItem in item.children" :key='subItem.id' :index="'/'+subItem.path">
+                <template slot="title">
+                  <!--图标-->
+                  <!--<i class="el-icon-menu"></i>-->
+                  <!--文本-->
+                  <span>{{ subItem.menu }}</span>
+                </template>
+              </el-menu-item>
+            </el-submenu>
           </el-menu>
-            <template v-for="(item,key) in menuList" slot="title">
-              <el-submenu index="1">
-
-              </el-submenu>
-
-            </template>
-        </el-col>
       </el-row>
     </el-aside>
     <!--=============主题部分========-->
@@ -40,24 +50,24 @@ export default {
   name: "Home",
   data(){
     return {
-      menuList:[]
+      /*侧边栏数据*/
+      menuList:[],
+      /* 左侧图标 */
+      icons: ['el-icon-user-solid', 'el-icon-s-operation', 'el-icon-s-goods', 'el-icon-s-order', 'el-icon-notebook-2'],
+      /* 控制菜单栏折叠的开关 */
+      isCollapse:false
     }
   },
   created() {
     // 页面加载时 自动运行此方法
-    getMenuList();
+    this.getMenuList();
   },
   methods: {
     /* 获取菜单栏数据 */
     async getMenuList() {
-      const {data} = await this.$http.get('menu')
+      const {data} = await this.$http.get('getMenuList')
       this.menuList = data.data
-    },
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      console.log(data)
     }
   }
 }
@@ -70,4 +80,8 @@ export default {
 .el-aside{
   background-color: #304156;
 }
+.el-menu{
+  border-right: none;
+}
+
 </style>
