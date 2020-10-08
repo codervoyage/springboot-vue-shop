@@ -6,7 +6,7 @@
           <el-menu
               background-color="#304156"
               text-color="#fff"
-              
+
               router
               active-text-color="#ffd04b"
               :collapse="isCollapse"
@@ -16,12 +16,12 @@
           >
             <!--==========一级目录==============-->
             <el-submenu v-for="(item,index) in menuList" :key="item.id" :index="item.id+''">
-              <template slot="title" v-if="item.id!=0">
+              <template slot="title">
                 <!-- <i :class="icons[index]"></i>-->
                 <span>{{ item.menu }}</span>
               </template>
               <!--=======二级目录========-->
-              <el-menu-item v-for="subItem in item.children" :key='subItem.id' :index="'/'+subItem.path">
+              <el-menu-item v-for="subItem in item.children" :key='subItem.id' :index="subItem.path">
                 <template slot="title">
                   <!--图标-->
                   <!--<i class="el-icon-menu"></i>-->
