@@ -3,34 +3,40 @@
     <!--========侧边栏===========-->
     <el-aside :width="isCollapse ? '64px' : '210px' ">
       <el-row class="tac">
-          <el-menu
-              background-color="#304156"
-              text-color="#fff"
+        <el-menu
+            background-color="#304156"
+            text-color="#fff"
 
-              router
-              active-text-color="#ffd04b"
-              :collapse="isCollapse"
-              :collapse-transition="false"
-              :default-active="this.$route.path"
+            router
+            active-text-color="#ffd04b"
+            :collapse="isCollapse"
+            :collapse-transition="false"
+            :default-active="this.$route.path"
 
-          >
-            <!--==========一级目录==============-->
-            <el-submenu v-for="(item,index) in menuList" :key="item.id" :index="item.id+''">
-              <template slot="title">
-                <!-- <i :class="icons[index]"></i>-->
-                <span>{{ item.menu }}</span>
-              </template>
-              <!--=======二级目录========-->
-              <el-menu-item v-for="subItem in item.children" :key='subItem.id' :index="subItem.path">
+        >
+          <div v-for="item in menuList">
+            <div v-if="item.id===1">
+              <el-menu-item :key='item.id' :index="item.path">
                 <template slot="title">
-                  <!--图标-->
-                  <!--<i class="el-icon-menu"></i>-->
-                  <!--文本-->
-                  <span>{{ subItem.menu }}</span>
+                  <span>{{ item.menu }}</span>
                 </template>
               </el-menu-item>
-            </el-submenu>
-          </el-menu>
+            </div>
+            <div v-else>
+              <el-submenu :key="item.id" :index="item.id+''">
+                <template slot="title">
+                  <span>{{ item.menu }}</span>
+                </template>
+                <el-menu-item v-for="subItem in item.children" :key='subItem.id' :index="subItem.path">
+                  <template slot="title">
+                    <span>{{ subItem.menu }}</span>
+                  </template>
+                </el-menu-item>
+              </el-submenu>
+            </div>
+          </div>
+
+        </el-menu>
       </el-row>
     </el-aside>
     <!--=============主题部分========-->
@@ -47,40 +53,42 @@
 
 <script>
 export default {
-  name: "Home",
-  data(){
+  name: 'Home',
+  data () {
     return {
       /*侧边栏数据*/
-      menuList:[],
+      menuList: [],
       /* 左侧图标 */
       icons: ['el-icon-user-solid', 'el-icon-s-operation', 'el-icon-s-goods', 'el-icon-s-order', 'el-icon-notebook-2'],
       /* 控制菜单栏折叠的开关 */
-      isCollapse:false
+      isCollapse: false
     }
   },
-  created() {
+  created () {
     // 页面加载时 自动运行此方法
-    this.getMenuList();
+    this.getMenuList()
   },
   methods: {
     /* 获取菜单栏数据 */
-    async getMenuList() {
-      const {data} = await this.$http.get('getMenuList')
+    async getMenuList () {
+      const { data } = await this.$http.get('getMenuList')
       this.menuList = data.data
-      console.log(data)
+      console.log(this.menuList)
     }
   }
 }
 </script>
 
 <style scoped>
-#ce{
+#ce {
   height: 100%;
 }
-.el-aside{
+
+.el-aside {
   background-color: #304156;
 }
-.el-menu{
+
+.el-menu {
   border-right: none;
 }
 

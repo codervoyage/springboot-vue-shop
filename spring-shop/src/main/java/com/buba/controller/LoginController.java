@@ -16,11 +16,20 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    /**
+     * 登录
+     * @param map
+     * @return
+     */
     @PostMapping(value = "/login")
     public HashMap Login(@RequestBody Map<String,String> map) {
         return loginService.login(map.get("username"),map.get("password"));
     }
 
+    /**
+     * 获取左侧菜单栏数据
+     * @return
+     */
     @GetMapping("/getMenuList")
     public HashMap getMenuList() {
         return loginService.getMenuList();
