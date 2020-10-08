@@ -1,11 +1,13 @@
 package com.buba.service;
 
 import com.buba.dao.LoginMapper;
+import com.buba.pojo.Menu;
 import com.buba.pojo.User;
 import com.buba.utils.RespMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service
@@ -22,6 +24,15 @@ public class LoginServiceImp implements LoginService{
         } else {
             res.put("meta", RespMsg.getStatus("账号或者密码错误", 400));
         }
+        return res;
+    }
+
+    @Override
+    public HashMap getMenuList() {
+        ArrayList<Menu> menuList = loginMapper.getMenuList();
+        HashMap res = new HashMap();
+        res.put("data", menuList);
+        res.put("meta", RespMsg.getStatus("获取成功", 200));
         return res;
     }
 }
