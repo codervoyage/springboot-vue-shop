@@ -3,19 +3,18 @@ package com.buba.pojo;
 
 public class Menu {
 
-  private long id;
+  private Integer id;
   private String menu;
-  private long pid;
+  private Integer pid;
+  private String path;
 
-
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
-
 
   public String getMenu() {
     return menu;
@@ -25,13 +24,19 @@ public class Menu {
     this.menu = menu;
   }
 
-
-  public long getPid() {
+  public Integer getPid() {
     return pid;
   }
 
-  public void setPid(long pid) {
+  public void setPid(Integer pid) {
     this.pid = pid;
   }
 
+  public String getPath() {
+    return path;
+  }
+
+  public void setPath(String path) {
+    this.path = path;
+  }
 }
