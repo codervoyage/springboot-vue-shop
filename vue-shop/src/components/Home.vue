@@ -173,5 +173,7 @@ export default {
 .el-menu {
   border-right: none;
 }
-
+.el-main{
+  padding: 0;
+}
 </style>

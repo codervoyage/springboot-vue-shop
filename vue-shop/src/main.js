@@ -24,7 +24,6 @@ Axios.interceptors.response.use(config =>{
   return config
 })
 Vue.prototype.$http = Axios
-
 Vue.config.productionTip = false
 
 new Vue({
