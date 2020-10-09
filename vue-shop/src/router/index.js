@@ -4,6 +4,8 @@ const Login = () => import('../components/Login')
 const Home = () => import('../components/Home')
 const Welcome = () => import('../components/Welcome')
 const User = () => import('../components/user/User')
+const History = () => import('../components/user/History')
+const Test = () => import('../components/user/Test')
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,7 +17,9 @@ const routes = [
     children:[
         /*路径*/
       {path:'/dashboard',component:Welcome},
-      {path: '/user/user',component:User}
+      {path: '/user/user',component:User},
+      {path: '/user/history',component:History},
+      {path: '/profile/password',component:Test}
     ]
   }
 ]
