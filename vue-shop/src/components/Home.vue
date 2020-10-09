@@ -52,6 +52,20 @@
             <el-tooltip class="item" effect="dark" content="全屏" placement="bottom">
               <i class="el-icon-full-screen" @click="screenfullClick" id="righticon" style="font-size:30px"></i>
             </el-tooltip>
+            <el-dropdown>
+              <span class="el-dropdown-link">
+                <img id="cardHeaderRightImg" src="../assets/topRightLogo.gif"/>
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>首页</el-dropdown-item>
+                <el-dropdown-item>GitHub</el-dropdown-item>
+                <el-dropdown-item>修改密码</el-dropdown-item>
+                <el-dropdown-item>退出</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+
+
           </div>
         </div>
 
@@ -66,6 +80,7 @@
 
 <script>
 import screenfull from 'screenfull'
+
 export default {
   name: 'Home',
   data () {
@@ -98,23 +113,28 @@ export default {
     },
     //点击进入全屏
     screenfullClick () {
-      screenfull.request();
+      screenfull.request()
     }
   }
 }
 </script>
 
 <style scoped>
+#cardHeaderRightImg {
+  width: 50px;
+  height: 50px;
+}
+
 #cardHeaderLeft {
   display: flex;
   align-items: center;
-  border: 1px solid rebeccapurple;
+  //border: 1px solid rebeccapurple;
 }
 
 #cardHeaderRight {
   display: flex;
   align-items: center;
-  border: 1px solid rebeccapurple;
+  //border: 1px solid rebeccapurple;
 }
 
 #cardHeader {
@@ -125,6 +145,7 @@ export default {
 
 #righticon {
   cursor: pointer;
+  margin-right: 20px;
 }
 
 #lefticon {
