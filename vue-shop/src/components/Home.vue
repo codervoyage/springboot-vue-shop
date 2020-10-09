@@ -58,7 +58,7 @@
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>首页</el-dropdown-item>
+                <el-dropdown-item v-on:click="dropdownMenuGoHome()">首页</el-dropdown-item>
                 <el-dropdown-item>GitHub</el-dropdown-item>
                 <el-dropdown-item>修改密码</el-dropdown-item>
                 <el-dropdown-item>退出</el-dropdown-item>
@@ -114,6 +114,10 @@ export default {
     //点击进入全屏
     screenfullClick () {
       screenfull.request()
+    },
+    dropdownMenuGoHome () {
+      //this.$router.push('/home')
+      alert('dian')
     }
   }
 }
