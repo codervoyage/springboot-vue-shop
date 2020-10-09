@@ -9,5 +9,4 @@ class SpringShopApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

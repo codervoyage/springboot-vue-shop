@@ -12,7 +12,6 @@
             :collapse="isCollapse"
             :collapse-transition="false"
             :default-active="this.$route.path"
-
         >
           <div v-for="item in menuList">
             <div v-if="item.id===1">
@@ -91,5 +90,7 @@ export default {
 .el-menu {
   border-right: none;
 }
-
+.el-main{
+  padding: 0;
+}
 </style>
