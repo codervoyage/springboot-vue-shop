@@ -6,34 +6,33 @@
         <el-menu
             background-color="#304156"
             text-color="#fff"
-
             router
             active-text-color="#ffd04b"
             :collapse="isCollapse"
-            :collapse-transition="false"
+            :collapse-transition="true"
             :default-active="this.$route.path"
+            unique-opened
         >
-          <div v-for="item in menuList">
-            <div v-if="item.id===1">
-              <el-menu-item :key='item.id' :index="item.path">
+          <template v-for="item in menuList">
+            <el-menu-item v-if="item.id===1" :key='item.id' :index="item.path">
+              <template slot="title">
+                <i class="el-icon-house"></i>
+                <span>{{ item.menu }}</span>
+              </template>
+            </el-menu-item>
+            <el-submenu v-else :key="item.id" :index="item.id+''">
+              <template slot="title">
+                <i class="el-icon-s-data"></i>
+                <span>{{ item.menu }}</span>
+              </template>
+              <el-menu-item v-for="subItem in item.children" :key='subItem.id' :index="subItem.path">
                 <template slot="title">
-                  <span>{{ item.menu }}</span>
+                  <i class="el-icon-menu"></i>
+                  <span>{{ subItem.menu }}</span>
                 </template>
               </el-menu-item>
-            </div>
-            <div v-else>
-              <el-submenu :key="item.id" :index="item.id+''">
-                <template slot="title">
-                  <span>{{ item.menu }}</span>
-                </template>
-                <el-menu-item v-for="subItem in item.children" :key='subItem.id' :index="subItem.path">
-                  <template slot="title">
-                    <span>{{ subItem.menu }}</span>
-                  </template>
-                </el-menu-item>
-              </el-submenu>
-            </div>
-          </div>
+            </el-submenu>
+          </template>
 
         </el-menu>
       </el-row>
@@ -41,7 +40,22 @@
     <!--=============主题部分========-->
     <el-container>
       <!--=========头部导航条=========-->
-      <el-header>Header</el-header>
+      <el-header>
+        <div id="cardHeader">
+          <div id="cardHeaderLeft">
+            <i @click="isCollapseSwitch" id="lefticon" style="font-size:30px" :class="icon"></i>
+            <el-breadcrumb>
+              <el-breadcrumb-item>首页</el-breadcrumb-item>
+            </el-breadcrumb>
+          </div>
+          <div id="cardHeaderRight">
+            <el-tooltip class="item" effect="dark" content="全屏" placement="bottom">
+              <i class="el-icon-full-screen" @click="screenfullClick" id="righticon" style="font-size:30px"></i>
+            </el-tooltip>
+          </div>
+        </div>
+
+      </el-header>
       <!--========主界面============-->
       <el-main>
         <router-view></router-view>
@@ -51,16 +65,16 @@
 </template>
 
 <script>
+import screenfull from 'screenfull'
 export default {
   name: 'Home',
   data () {
     return {
       /*侧边栏数据*/
       menuList: [],
-      /* 左侧图标 */
-      icons: ['el-icon-user-solid', 'el-icon-s-operation', 'el-icon-s-goods', 'el-icon-s-order', 'el-icon-notebook-2'],
       /* 控制菜单栏折叠的开关 */
-      isCollapse: false
+      isCollapse: false,
+      icon: 'el-icon-s-fold',
     }
   },
   created () {
@@ -73,12 +87,56 @@ export default {
       const { data } = await this.$http.get('getMenuList')
       this.menuList = data.data
       console.log(this.menuList)
+    },//控制左侧菜单栏是否折叠
+    isCollapseSwitch () {
+      this.isCollapse = !this.isCollapse
+      if (this.isCollapse) {
+        this.icon = 'el-icon-s-unfold'
+      } else {
+        this.icon = 'el-icon-s-fold'
+      }
+    },
+    //点击进入全屏
+    screenfullClick () {
+      screenfull.request();
     }
   }
 }
 </script>
 
 <style scoped>
+#cardHeaderLeft {
+  display: flex;
+  align-items: center;
+  border: 1px solid rebeccapurple;
+}
+
+#cardHeaderRight {
+  display: flex;
+  align-items: center;
+  border: 1px solid rebeccapurple;
+}
+
+#cardHeader {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#righticon {
+  cursor: pointer;
+}
+
+#lefticon {
+  cursor: pointer;
+  margin-right: 10px;
+
+}
+
+.el-header {
+  padding: 0;
+}
+
 #ce {
   height: 100%;
 }
