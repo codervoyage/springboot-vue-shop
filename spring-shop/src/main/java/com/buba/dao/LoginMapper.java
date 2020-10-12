@@ -19,4 +19,5 @@ public interface LoginMapper {
     List<GetMenuList> findStairMenu();
     @Select("select * from menu where level = '1'")
     List<GetMenuList> findSecondMenu();
+    int updatePassword(@Param("userId") Integer userId,@Param("password") String newPassword);
 }

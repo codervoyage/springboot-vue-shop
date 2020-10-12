@@ -26,6 +26,10 @@ public class LoginController {
         return loginService.login(map.get("username"),map.get("password"));
     }
 
+    @PostMapping(value = "/updatePassword")
+    public HashMap updatePassword(@RequestBody Map map) {
+        return loginService.updatePassword((Integer)map.get("userId"), (String)map.get("newPassword"));
+    }
     /**
      * 获取左侧菜单栏数据
      * @return

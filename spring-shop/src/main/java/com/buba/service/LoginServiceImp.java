@@ -7,7 +7,9 @@ import com.buba.pojo.User;
 import com.buba.utils.RespMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +52,21 @@ public class LoginServiceImp implements LoginService{
         } else {
             res.put("data", null);
             res.put("meta", RespMsg.getStatus("查询失败，后端问题", 400));
+        }
+        return res;
+    }
+
+    @Override
+    @Transactional
+    public HashMap updatePassword(Integer userId, String newPassword) {
+        int i = loginMapper.updatePassword(userId, newPassword);
+        HashMap res = new HashMap();
+        if (i > 0) {
+            res.put("data", null);
+            res.put("meta", RespMsg.getStatus("修改密码成功", 200));
+        } else {
+            res.put("data", null);
+            res.put("meta", RespMsg.getStatus("修改密码失败", 400));
         }
         return res;
     }
