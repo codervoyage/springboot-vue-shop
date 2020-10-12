@@ -13,8 +13,7 @@
     "vue": "^2.6.11",
     "vue-count-to": "^1.0.13",
     "nprogress": "^0.2.0",
-    "screenfull": "^5.0.2",
-    "vue": "^2.6.11"
+    "screenfull": "^5.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

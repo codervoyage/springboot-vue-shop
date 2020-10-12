@@ -1,12 +1,20 @@
 <template>
-<div>
-  会员管理
-</div>
+  <div>
+    <p>1111111111111</p>
+  </div>
 </template>
 
 <script>
 export default {
-name: "User"
+  name: 'User',
+  data () {
+    return{
+
+    }
+  },
+  methods:{
+
+  }
 }
 </script>
 
