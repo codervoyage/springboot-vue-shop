@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import ShipAddress from "@/components/user/ShipAddress";
 const Login = () => import('../components/Login')
 const Home = () => import('../components/Home')
 const Welcome = () => import('../components/Welcome')
@@ -16,6 +17,9 @@ const routes = [
     /*子路由*/
     children:[
         /*路径*/
+      {path: '/dashboard',component:Welcome},
+      {path: '/user/user',component:User},
+      {path: '/user/address',component:ShipAddress},
       {path:'/dashboard',component:Welcome},
       {path: '/user/user',component:User},
       {path: '/user/history',component:History},

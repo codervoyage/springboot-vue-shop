@@ -3,7 +3,7 @@
 <mapper namespace="com.buba.dao.LoginMapper">
 
     <select id="login" resultType="user">
-        select * from user where user_name = #{username} and user_password = #{password}
+        select * from user where user_account = #{username} and user_password = #{password}
     </select>
     <update id="updatePassword">
         update user set user_password = #{password} where user_id = #{userId}
