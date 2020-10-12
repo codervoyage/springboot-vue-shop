@@ -28,4 +28,9 @@ public class ShipAddressServiceImp implements ShipAddressService {
 
         return listMap;
     }
+
+    @Override
+    public int getNomber() {
+        return shipAddressMapper.getNumber();
+    }
 }

@@ -32,6 +32,7 @@
             <el-table-column prop="id" label="地址ID" width="180"></el-table-column>
             <el-table-column prop="uid" label="收货人ID" width="180">  </el-table-column>
             <el-table-column prop="user.userName" label="收货人姓名"></el-table-column>
+            <el-table-column prop="user.userPhone" label="收货人电话"></el-table-column>
             <el-table-column prop="area" label="地址"></el-table-column>
             <el-table-column prop="address" label="详细地址"></el-table-column>
           </el-table>
@@ -50,7 +51,7 @@
               :page-sizes="[4, 6, 8, 10]"
               :page-size="1"
               layout="total, sizes, prev, pager, next, jumper"
-              :total="400">
+              :total=listMunber>
           </el-pagination>
         </div>
       </el-col>
@@ -67,11 +68,12 @@ export default {
       tableData:[],
       currentPage:1,
       pageSize:4,
-
+      listMunber:0
     }
   },
   created() {
     this.getTable(this.currentPage,this.pageSize)
+    this.gitNumber()
   },
   methods:{
   /*===每页显示条数发生改变时触发===*/
@@ -97,8 +99,12 @@ export default {
         currentPage,pageSize
         }})
       this.tableData = data.data
-      console.log(this.tableData)
     },
+    /*获取总条数*/
+    async gitNumber(){
+      const { data } = await this.$http.get('getNumber')
+      this.listMunber = data;
+    }
   }
 }
 </script>
