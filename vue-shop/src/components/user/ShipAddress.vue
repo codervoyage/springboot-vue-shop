@@ -3,7 +3,7 @@
     <el-card id="box">
       <!--============查询================-->
       <el-row :gutter="20">
-        <el-col :span="4" :offset="6">
+        <el-col :span="4" :offset="1">
           <el-input
               placeholder="请输入用户ID"
               v-model="input"
@@ -37,7 +37,6 @@
             <el-table-column prop="area" label="地址"></el-table-column>
             <el-table-column prop="address" label="详细地址"></el-table-column>
           </el-table>
-<<<<<<< HEAD
         </el-col>
       </el-row>
       <!--==============分页===================-->
@@ -59,28 +58,6 @@
         </el-col>
       </el-row>
     </el-card>
-=======
-      </el-col>
-    </el-row>
-    <!--==============分页===================-->
-    <el-row :gutter="20">
-      <el-col :span="24" :offset="1">
-        <div class="block">
-          <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              @prev-click="prevClick"
-              @next-click="nextClick"
-              :current-page="currentPage"
-              :page-sizes="[4, 6, 8, 10]"
-              :page-size="1"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total=listMunber>
-          </el-pagination>
-        </div>
-      </el-col>
-    </el-row>
->>>>>>> 6b43e83fc23893e46d55d9286eb3b7b669b22610
   </div>
 </template>
 
