@@ -12,4 +12,6 @@ public interface ShipAddressMapper {
 
     @Select("select count(*) from user_address")
     int getNumber();
+
+    int same(@Param("userID") Integer userID, @Param("userName") String userName);
 }

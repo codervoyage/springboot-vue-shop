@@ -35,9 +35,11 @@ public class ShipAddressServiceImp implements ShipAddressService {
     @Override
     public HashMap selectOne(Integer userID, String userName, Integer currentPage, Integer pageSize) {
         ArrayList  limitList = shipAddressMapper.limitAddress(userID,userName,currentPage,pageSize);
+        int same = shipAddressMapper.same(userID,userName);
         HashMap listMap = new HashMap<>();
         if (limitList!=null){
             listMap.put("data",limitList);
+            listMap.put("same",same);
             listMap.put("meta", RespMsg.getStatus("获取成功",200));
         }else {
             listMap.put("meta",RespMsg.getStatus("获取失败",400));

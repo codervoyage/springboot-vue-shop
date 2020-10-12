@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.buba.dao.ShipAddressMapper">
-<resultMap id="UA" type="com.buba.pojo.UserAddress">
+<resultMap id="UA" type="userAddress">
     <result column="id" property="id"></result>
     <result column="uid" property="uid"></result>
     <result column="area" property="area"></result>
@@ -21,9 +21,19 @@
             and ua.uid=${userID}
         </if>
         <if test="userName!=null and userName!=''">
-            and us.user_name=#{userName}
+            and us.user_name like concat('%',#{userName},'%')
         </if>
         LIMIT ${pageSize * (currentPage-1)},${pageSize}
     </select>
 
+    <select id="same" resultType="java.lang.Integer">
+        SELECT count(*) FROM user_address AS ua, user AS us
+        WHERE ua.uid = us.user_id
+        <if test="userID!=0 and userID!=null">
+            and ua.uid=${userID}
+        </if>
+        <if test="userName!=null and userName!=''">
+            and us.user_name like concat('%',#{userName},'%')
+        </if>
+    </select>
 </mapper>
