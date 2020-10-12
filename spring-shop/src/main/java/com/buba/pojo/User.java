@@ -4,11 +4,20 @@ public class User {
 
   private Integer userId;
   private String userName;
+  private String userAccount;
   private String userPassword;
   private Integer userPhone;
   private String userSex;
   private Integer userGrade;
   private Integer userState;
+
+  public String getUserAccount() {
+    return userAccount;
+  }
+
+  public void setUserAccount(String userAccount) {
+    this.userAccount = userAccount;
+  }
 
   public Integer getUserId() {
     return userId;

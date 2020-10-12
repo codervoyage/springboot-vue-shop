@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buba.dao.ShipAddressMapper">
+<resultMap id="UA" type="com.buba.pojo.UserAddress">
+    <result column="id" property="id"></result>
+    <result column="uid" property="uid"></result>
+    <result column="area" property="area"></result>
+    <result column="address" property="address"></result>
+    <result column="status" property="status"></result>
+    <collection property="user" ofType="com.buba.pojo.User">
+        <result column="user_id" property="userId"></result>
+        <result column="user_name" property="userName"></result>
+        <result column="user_phone" property="userPhone"></result>
+    </collection>
+</resultMap>
+
+    <select id="limitAddress" resultMap="UA">
+        SELECT * FROM user_address AS ua, user AS us
+        WHERE ua.uid = us.user_id
+        LIMIT ${pageSize * (currentPage-1)},${pageSize}
+    </select>
+
+
+
+</mapper>
