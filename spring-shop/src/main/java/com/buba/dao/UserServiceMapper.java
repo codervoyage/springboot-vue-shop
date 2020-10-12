@@ -14,4 +14,6 @@ public interface UserServiceMapper {
                            @Param("userId") Integer userId,
                            @Param("username") String username,
                            @Param("phone") Integer phone);
+
+    Integer getTotal(Integer userId, String username, Integer phone);
 }

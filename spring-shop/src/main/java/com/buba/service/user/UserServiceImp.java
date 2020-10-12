@@ -15,15 +15,15 @@ public class UserServiceImp implements UserService{
     private UserServiceMapper userServiceMapper;
     @Override
     public HashMap getUserList(Integer currentPage, Integer pageSize,Integer userId, String username, Integer phone) {
-        System.out.println(userId);
-        System.out.println(phone);
         List<User> list =  userServiceMapper.getUserList(currentPage, pageSize,userId,username,phone);
+        Integer total =  userServiceMapper.getTotal(userId,username,phone);
         HashMap res = new HashMap();
         if (list != null) {
             list.stream().forEach(user ->{
                 user.setUserPassword("******");
             });
             res.put("data", list);
+            res.put("total", total);
             res.put("meta", RespMsg.getStatus("获取成功", 200));
         } else {
             res.put("meta", RespMsg.getStatus("获取失败", 400));

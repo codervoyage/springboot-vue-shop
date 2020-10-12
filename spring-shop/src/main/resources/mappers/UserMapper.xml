@@ -18,5 +18,21 @@
         </where>
         limit ${size * (page-1)},${size}
     </select>
+    <select id="getTotal" resultType="int">
+        select
+        count(1)
+        from user
+        <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="phone != null and phone != ''">
+                and user_phone = #{phone}
+            </if>
+            <if test="username != null and username != ''">
+                and user_name like concat('%',#{username},'%')
+            </if>
+        </where>
+    </select>
 
 </mapper>

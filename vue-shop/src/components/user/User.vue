@@ -73,7 +73,7 @@
                 :page-sizes="[4, 6, 8, 10]"
                 :page-size="1"
                 layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
+                :total="total">
             </el-pagination>
           </div>
         </el-col>
@@ -95,6 +95,7 @@ export default {
       //当前页数and页面大小
       currentPage: 1,
       pageSize: 4,
+      total: 0,
       //搜索的查询字段
       inputUserId: '',
       inputPhone: '',
@@ -126,6 +127,7 @@ export default {
               }
             })
         this.tableData = res.data
+        this.total = res.total
       }
     },
     getLikeList () {
