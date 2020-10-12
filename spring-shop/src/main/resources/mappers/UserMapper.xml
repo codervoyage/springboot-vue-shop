@@ -16,9 +16,7 @@
                 and user_name like concat('%',#{username},'%')
             </if>
         </where>
-
         limit ${size * (page-1)},${size}
-
     </select>
 
 </mapper>
