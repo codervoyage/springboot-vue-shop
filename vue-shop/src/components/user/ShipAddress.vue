@@ -33,9 +33,11 @@
             <el-table-column prop="id" label="地址ID" width="180"></el-table-column>
             <el-table-column prop="uid" label="收货人ID" width="180">  </el-table-column>
             <el-table-column prop="user.userName" label="收货人姓名"></el-table-column>
+            <el-table-column prop="user.userPhone" label="收货人电话"></el-table-column>
             <el-table-column prop="area" label="地址"></el-table-column>
             <el-table-column prop="address" label="详细地址"></el-table-column>
           </el-table>
+<<<<<<< HEAD
         </el-col>
       </el-row>
       <!--==============分页===================-->
@@ -57,6 +59,28 @@
         </el-col>
       </el-row>
     </el-card>
+=======
+      </el-col>
+    </el-row>
+    <!--==============分页===================-->
+    <el-row :gutter="20">
+      <el-col :span="24" :offset="1">
+        <div class="block">
+          <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              @prev-click="prevClick"
+              @next-click="nextClick"
+              :current-page="currentPage"
+              :page-sizes="[4, 6, 8, 10]"
+              :page-size="1"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total=listMunber>
+          </el-pagination>
+        </div>
+      </el-col>
+    </el-row>
+>>>>>>> 6b43e83fc23893e46d55d9286eb3b7b669b22610
   </div>
 </template>
 
@@ -69,11 +93,12 @@ export default {
       tableData:[],
       currentPage:1,
       pageSize:4,
-
+      listMunber:0
     }
   },
   created() {
     this.getTable(this.currentPage,this.pageSize)
+    this.gitNumber()
   },
   methods:{
   /*===每页显示条数发生改变时触发===*/
@@ -99,8 +124,12 @@ export default {
         currentPage,pageSize
         }})
       this.tableData = data.data
-      console.log(this.tableData)
     },
+    /*获取总条数*/
+    async gitNumber(){
+      const { data } = await this.$http.get('getNumber')
+      this.listMunber = data;
+    }
   }
 }
 </script>
