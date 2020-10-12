@@ -2,8 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.buba.dao.UserServiceMapper">
     <select id="getUserList" resultType="user">
-        select user_id,user_name,user_phone,user_sex,user_grade,user_state from user
+        select
+        user_id,user_name,user_phone,user_sex,user_grade,user_state
+        from user
+        <where>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="phone != null and phone != ''">
+                and user_phone = #{phone}
+            </if>
+            <if test="username != null and username != ''">
+                and user_name like concat('%',#{username},'%')
+            </if>
+        </where>
+
         limit ${size * (page-1)},${size}
+
     </select>
 
 </mapper>

@@ -20,7 +20,12 @@ public class UserController {
      * @return
      */
     @GetMapping(value = "/getUserList")
-    public HashMap getUserList(Integer currentPage,Integer pageSize) {
-        return userService.getUserList(currentPage,pageSize);
+    public HashMap getUserList
+    (Integer currentPage,
+     Integer pageSize,
+     Integer userId,
+     String username,
+     Integer phone) {
+        return userService.getUserList(currentPage,pageSize,userId,username,phone);
     }
 }

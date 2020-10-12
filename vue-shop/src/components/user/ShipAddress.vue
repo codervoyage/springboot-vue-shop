@@ -2,7 +2,7 @@
   <div>
     <el-card id="box">
       <!--============查询================-->
-      <el-row :gutter="20">
+      <el-row :gutter="20" style="margin-bottom: 10px">
         <el-col :span="4" :offset="1">
           <el-input
               placeholder="请输入用户ID"

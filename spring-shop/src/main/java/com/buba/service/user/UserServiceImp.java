@@ -14,8 +14,10 @@ public class UserServiceImp implements UserService{
     @Autowired
     private UserServiceMapper userServiceMapper;
     @Override
-    public HashMap getUserList(Integer currentPage, Integer pageSize) {
-        List<User> list =  userServiceMapper.getUserList(currentPage, pageSize);
+    public HashMap getUserList(Integer currentPage, Integer pageSize,Integer userId, String username, Integer phone) {
+        System.out.println(userId);
+        System.out.println(phone);
+        List<User> list =  userServiceMapper.getUserList(currentPage, pageSize,userId,username,phone);
         HashMap res = new HashMap();
         if (list != null) {
             list.stream().forEach(user ->{
