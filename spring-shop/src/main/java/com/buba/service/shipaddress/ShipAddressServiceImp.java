@@ -1,4 +1,4 @@
-package com.buba.service;
+package com.buba.service.shipaddress;
 
 import com.buba.dao.ShipAddressMapper;
 import com.buba.utils.RespMsg;
@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class ShipAddressServiceImp implements ShipAddressService {
@@ -17,7 +15,7 @@ public class ShipAddressServiceImp implements ShipAddressService {
 
     @Override
     public HashMap limitAddress(Integer currentPage, Integer pageSize) {
-        ArrayList  limitList = shipAddressMapper.limitAddress(currentPage,pageSize);
+        ArrayList  limitList = shipAddressMapper.limitAddress(null,null,currentPage,pageSize);
         HashMap listMap = new HashMap<>();
         if (limitList!=null){
             listMap.put("data",limitList);
@@ -32,5 +30,18 @@ public class ShipAddressServiceImp implements ShipAddressService {
     @Override
     public int getNomber() {
         return shipAddressMapper.getNumber();
+    }
+
+    @Override
+    public HashMap selectOne(Integer userID, String userName, Integer currentPage, Integer pageSize) {
+        ArrayList  limitList = shipAddressMapper.limitAddress(userID,userName,currentPage,pageSize);
+        HashMap listMap = new HashMap<>();
+        if (limitList!=null){
+            listMap.put("data",limitList);
+            listMap.put("meta", RespMsg.getStatus("获取成功",200));
+        }else {
+            listMap.put("meta",RespMsg.getStatus("获取失败",400));
+        }
+        return listMap;
     }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 @Repository
 public interface ShipAddressMapper {
-    ArrayList limitAddress(@Param("currentPage") int currentPage, @Param("pageSize") int pageSize);
+    ArrayList limitAddress(@Param("userID") Integer userID,@Param("userName") String userName, @Param("currentPage") int currentPage, @Param("pageSize") int pageSize);
 
     @Select("select count(*) from user_address")
     int getNumber();
