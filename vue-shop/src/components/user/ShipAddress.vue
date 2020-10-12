@@ -1,31 +1,32 @@
 <template>
   <div>
-    <!--============查询================-->
-    <el-row :gutter="20">
-      <el-col :span="4" :offset="6">
-        <el-input
-            placeholder="请输入用户ID"
-            v-model="input"
-            clearable>
-        </el-input>
-      </el-col>
-      <el-col :span="4">
-        <el-input
-            placeholder="请输入收货人名称"
-            v-model="input"
-            clearable>
-        </el-input>
-      </el-col>
-      <el-col :span="2">
-        <el-button type="primary" icon="el-icon-search">查找</el-button>
-      </el-col>
-      <el-col :span="2">
-        <el-button type="primary" icon="el-icon-upload2">导出</el-button>
-      </el-col>
-    </el-row>
-    <!-- ----------收货地址表格---------------- -->
-    <el-row :gutter="20">
-      <el-col :span="22" :offset="1">
+    <el-card id="box">
+      <!--============查询================-->
+      <el-row :gutter="20">
+        <el-col :span="4" :offset="6">
+          <el-input
+              placeholder="请输入用户ID"
+              v-model="input"
+              clearable>
+          </el-input>
+        </el-col>
+        <el-col :span="4">
+          <el-input
+              placeholder="请输入收货人名称"
+              v-model="input"
+              clearable>
+          </el-input>
+        </el-col>
+        <el-col :span="2">
+          <el-button type="primary" icon="el-icon-search">查找</el-button>
+        </el-col>
+        <el-col :span="2">
+          <el-button type="primary" icon="el-icon-upload2">导出</el-button>
+        </el-col>
+      </el-row>
+      <!-- ----------收货地址表格---------------- -->
+      <el-row :gutter="20">
+        <el-col :span="22" :offset="1">
           <el-table
               :data="tableData"
               border>
@@ -35,26 +36,27 @@
             <el-table-column prop="area" label="地址"></el-table-column>
             <el-table-column prop="address" label="详细地址"></el-table-column>
           </el-table>
-      </el-col>
-    </el-row>
-    <!--==============分页===================-->
-    <el-row :gutter="20">
-      <el-col :span="24" :offset="1">
-        <div class="block">
-          <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              @prev-click="prevClick"
-              @next-click="nextClick"
-              :current-page="currentPage"
-              :page-sizes="[4, 6, 8, 10]"
-              :page-size="1"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="400">
-          </el-pagination>
-        </div>
-      </el-col>
-    </el-row>
+        </el-col>
+      </el-row>
+      <!--==============分页===================-->
+      <el-row :gutter="20">
+        <el-col :span="24" :offset="1">
+          <div class="block">
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                @prev-click="prevClick"
+                @next-click="nextClick"
+                :current-page="currentPage"
+                :page-sizes="[4, 6, 8, 10]"
+                :page-size="1"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+            </el-pagination>
+          </div>
+        </el-col>
+      </el-row>
+    </el-card>
   </div>
 </template>
 
@@ -104,5 +106,7 @@ export default {
 </script>
 
 <style scoped>
-
+#box{
+  margin : 0 10px 0 10px;
+}
 </style>
