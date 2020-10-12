@@ -1,14 +1,14 @@
 <template>
 <div>
   <el-card id="box">
-  历史记录
+    反馈记录
   </el-card>
 </div>
 </template>
 
 <script>
 export default {
-name: "History"
+  name: 'Feedback'
 }
 </script>
 

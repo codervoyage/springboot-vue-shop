@@ -5,10 +5,10 @@
         <el-input v-model="formInfo.oldPassword"></el-input>
       </el-form-item>
       <el-form-item label="新密码" prop="newPassword">
-        <el-input v-model="formInfo.newPassword"></el-input>
+        <el-input type="password" v-model="formInfo.newPassword"></el-input>
       </el-form-item>
       <el-form-item label="确认新密码" prop="newPwd">
-        <el-input v-model="formInfo.newPwd"></el-input>
+        <el-input type="password" v-model="formInfo.newPwd"></el-input>
       </el-form-item>
       <el-form-item class="btn">
         <el-button type="primary" @click="updatePassword">修改</el-button>

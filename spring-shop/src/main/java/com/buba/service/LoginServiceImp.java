@@ -26,7 +26,6 @@ public class LoginServiceImp implements LoginService{
             res.put("data", user);
             res.put("meta", RespMsg.getStatus("登录成功", 200));
         } else {
-            res.put("data", null);
             res.put("meta", RespMsg.getStatus("账号或者密码错误", 400));
         }
         return res;

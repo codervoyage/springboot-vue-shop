@@ -7,6 +7,7 @@ const Welcome = () => import('../components/Welcome')
 const User = () => import('../components/user/User')
 const History = () => import('../components/user/History')
 const Test = () => import('../components/user/Test')
+const Feedback = () => import('../components/user/Feedback')
 Vue.use(VueRouter)
 
 const routes = [
@@ -23,7 +24,8 @@ const routes = [
       {path:'/dashboard',component:Welcome},
       {path: '/user/user',component:User},
       {path: '/user/history',component:History},
-      {path: '/profile/password',component:Test}
+      {path: '/profile/password',component:Test},
+      {path: '/user/feedback',component:Feedback}
     ]
   }
 ]
