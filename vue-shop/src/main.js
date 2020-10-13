@@ -14,6 +14,18 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 Vue.use(NProgress)
 
+// 在全局定义了一个时间过滤器组件
+Vue.filter('dateFormat', timeStamp => {
+  if (!timeStamp) return ''
+  const time = new Date(timeStamp * 1)
+  const y = time.getFullYear()
+  const m = (time.getMonth() + 1 + '').padStart(2, '0')
+  const d = (time.getDate() + '').padStart(2, '0')
+  const hh = (time.getHours() + '').padStart(2, '0')
+  const mm = (time.getMinutes() + '').padStart(2, '0')
+  const ss = (time.getSeconds() + '').padStart(2, '0')
+  return `${y}年${m}月${d}日`
+})
 Axios.defaults.baseURL = 'http://localhost:8081/'
 Axios.interceptors.request.use(config =>{
   NProgress.start()

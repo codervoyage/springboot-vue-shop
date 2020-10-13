@@ -1,4 +1,4 @@
-package com.buba.service.shipaddress;
+package com.buba.service.user;
 
 import com.buba.dao.ShipAddressMapper;
 import com.buba.utils.RespMsg;

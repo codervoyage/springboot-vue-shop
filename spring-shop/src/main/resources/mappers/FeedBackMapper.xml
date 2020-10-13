@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buba.dao.FeedBackMapper">
+    <resultMap id="UF" type="userFeedback">
+        <result column="id" property="id"></result>
+        <result column="uid" property="uid"></result>
+        <result column="feedback_content" property="feedbackContent"></result>
+        <result column="feedback_picture" property="feedbackPicture"></result>
+        <result column="feedback_time" property="feedbackTime"></result>
+        <collection property="user" ofType="com.buba.pojo.User">
+            <result column="user_id" property="userId"></result>
+            <result column="user_name" property="userName"></result>
+            <result column="user_phone" property="userPhone"></result>
+        </collection>
+    </resultMap>
+
+    <select id="limitBack" resultMap="UF">
+        SELECT * FROM user_feedback AS uf, user AS us
+        WHERE uf.uid = us.user_id
+        <if test="feedBackID!=0 and feedBackID!=null">
+            and uf.id=${feedBackID}
+        </if>
+        <if test="userName!=null and userName!=''">
+            and us.user_name like concat('%',#{userName},'%')
+        </if>
+        LIMIT ${pageSize * (currentPage-1)},${pageSize}
+    </select>
+
+    <select id="same" resultType="java.lang.Integer">
+        SELECT count(*) FROM user_feedback AS uf, user AS us
+        WHERE uf.uid = us.user_id
+        <if test="feedBackID!=0 and feedBackID!=null">
+            and uf.id=${feedBackID}
+        </if>
+        <if test="userName!=null and userName!=''">
+            and us.user_name like concat('%',#{userName},'%')
+        </if>
+    </select>
+</mapper>

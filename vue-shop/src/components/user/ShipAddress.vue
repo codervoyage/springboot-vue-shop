@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card>
+    <el-card id="box">
       <!--============查询================-->
       <el-row :gutter="20" style="margin-bottom: 10px">
         <el-col :span="4" :offset="1">
