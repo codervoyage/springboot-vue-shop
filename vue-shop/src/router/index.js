@@ -8,6 +8,9 @@ const User = () => import('../components/user/User')
 const History = () => import('../components/user/History')
 const Test = () => import('../components/user/Test')
 const Feedback = () => import('../components/user/Feedback')
+const Area = () => import('../components/mall/Area')
+const Brand = () => import('../components/mall/Brand')
+const Category = () => import('../components/mall/Category')
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,7 +28,10 @@ const routes = [
       {path: '/user/user',component:User},
       {path: '/user/history',component:History},
       {path: '/profile/password',component:Test},
-      {path: '/user/feedback',component:Feedback}
+      {path: '/user/feedback',component:Feedback},
+      {path: '/mall/brand',component:Brand},
+      {path: '/mall/region',component:Area},
+      {path: '/mall/category',component:Category}
     ]
   }
 ]

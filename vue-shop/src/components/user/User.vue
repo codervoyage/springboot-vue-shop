@@ -57,6 +57,11 @@
                 <el-tag type="danger" v-else>不可用</el-tag>
               </template>
             </el-table-column>
+            <el-table-column label="操作">
+              <template v-slot="scope">
+                <el-button type="primary" size="mini" @click="dialogVisible = true">详情</el-button>
+              </template>
+            </el-table-column>
           </el-table>
         </el-col>
       </el-row>
@@ -78,6 +83,21 @@
           </div>
         </el-col>
       </el-row>
+      <el-dialog
+          title="用户编辑"
+          :visible.sync="dialogVisible"
+          width="40%"
+      >
+        <el-form :model="form" label-width="80px" style="width: 400px">
+          <el-form-item label="活动名称">
+            <el-input></el-input>
+          </el-form-item>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span>
+      </el-dialog>
     </el-card>
   </div>
 </template>
@@ -99,7 +119,13 @@ export default {
       //搜索的查询字段
       inputUserId: '',
       inputPhone: '',
-      inputUserName: ''
+      inputUserName: '',
+      // 控制dialog开关
+      dialogVisible: false,
+      //
+      form:{
+
+      }
     }
   },
   created () {
@@ -192,6 +218,10 @@ export default {
       return wbout
     }
     ,
+    //点击按钮查看详情。可修改数据，重新提交
+    updateUser (userInfo) {
+
+    }
     //
   }
 }
