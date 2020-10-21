@@ -36,7 +36,7 @@
         </where>
     </select>
 
-    <update id="updateUserOne" parameterType="com.buba.pojo.User">
+    <update id="updateUserOne" parameterType="com.buba.pojo.user.User">
 		update user set
 		user_name=#{user.userName},
 		user_phone=${user.userPhone},

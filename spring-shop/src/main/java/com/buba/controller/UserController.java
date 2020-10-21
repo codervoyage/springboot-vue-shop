@@ -1,6 +1,6 @@
 package com.buba.controller;
 
-import com.buba.pojo.User;
+import com.buba.pojo.user.User;
 import com.buba.service.user.ShipAddressService;
 import com.buba.service.user.UserHistoryService;
 import com.buba.service.user.UserService;
