@@ -46,7 +46,10 @@
             <el-table-column prop="userSex" label="性别"></el-table-column>
             <el-table-column label="等级">
               <template v-slot="scope">
-
+                <el-tag v-if="scope.row.userGrade === 0">超级管理员</el-tag>
+                <el-tag type="info" v-else-if="scope.row.userGrade === 1">Vip用户</el-tag>
+                <el-tag type="warning" v-else-if="scope.row.userGrade === 2">普通用户</el-tag>
+                <el-tag type="warning" v-else-if="scope.row.userGrade === 3">新进用户</el-tag>
               </template>
             </el-table-column>
             <el-table-column label="状态">
@@ -165,18 +168,42 @@ export default {
       // 控制dialog开关
       dialogVisible: false,
       //dialog的form表单数据
-      form:{
+      form: {
         userName: '',
         userAccount: '',
-        userPhone:'',
-        userSex:'',
-        userGrade:'',
-        userState:''
+        userPhone: '',
+        userSex: '',
+        userGrade: '',
+        userState: ''
       },
       //dialog->from->几个下拉菜单的数据
-      sex:[{value: 0,label: '男'},{value: 1, label: '女'},],
-      grade:[{value: 0, label: '超级管理员'}, {value: 1, label: 'vip用户'}, {value: 2, label: '普通用户'},{value: 3, label: '新进用户'}],
-      state:[{value: 0, label: '不可用'},{value: 1,label: '可用'}]
+      sex: [{
+        value: 0,
+        label: '男'
+      }, {
+        value: 1,
+        label: '女'
+      },],
+      grade: [{
+        value: 0,
+        label: '超级管理员'
+      }, {
+        value: 1,
+        label: 'vip用户'
+      }, {
+        value: 2,
+        label: '普通用户'
+      }, {
+        value: 3,
+        label: '新进用户'
+      }],
+      state: [{
+        value: 0,
+        label: '不可用'
+      }, {
+        value: 1,
+        label: '可用'
+      }]
     }
   },
   created () {
@@ -269,35 +296,35 @@ export default {
       return wbout
     },
     /*查看详情*/
-    selectAndUpdate(val){
+    selectAndUpdate (val) {
       this.dialogVisible = true
-      this.form.userName=val.userName
-      this.form.userAccount=val.userAccount
-      this.form.userPhone=val.userPhone
-      this.form.userSex=val.userSex
-      this.form.userGrade=val.userGrade
-      this.form.userState=val.userState
+      this.form.userName = val.userName
+      this.form.userAccount = val.userAccount
+      this.form.userPhone = val.userPhone
+      this.form.userSex = val.userSex
+      this.form.userGrade = val.userGrade
+      this.form.userState = val.userState
     },
     /*提交dialog内form表单*/
-    async submitDialog(val){
+    async submitDialog (val) {
       this.dialogVisible = false
-      console.log(val);
-      if(val==null){
+      console.log(val)
+      if (val == null) {
         this.$notify.warning({
           title: '提示',
           message: '修改信息不正确'
         })
-      }else {
+      } else {
         const { data } = await this.$http.get('/updateUserOne', {
-              params: {
-                userName: val.userName,
-                userAccount:val.userAccount,
-                userPhone:val.userPhone,
-                userSex:val.userSex,
-                userGrade:val.userGrade,
-                userState:val.userState
-              }
-            })
+          params: {
+            userName: val.userName,
+            userAccount: val.userAccount,
+            userPhone: val.userPhone,
+            userSex: val.userSex,
+            userGrade: val.userGrade,
+            userState: val.userState
+          }
+        })
         this.$notify.success({
           title: '提示',
           message: '修改成功'
