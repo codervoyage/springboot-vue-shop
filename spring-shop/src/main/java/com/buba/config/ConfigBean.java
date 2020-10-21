@@ -17,7 +17,7 @@ public class ConfigBean implements WebMvcConfigurer {
                 .excludePathPatterns("/login");
     }
 
-    // 解决跨域
+    // 解决跨域 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")

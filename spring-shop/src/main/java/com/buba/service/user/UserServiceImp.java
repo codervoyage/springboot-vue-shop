@@ -30,4 +30,10 @@ public class UserServiceImp implements UserService{
         }
         return res;
     }
+
+    @Override
+    public int updateUserOne(User user) {
+        int i = userServiceMapper.updateUserOne(user);
+        return 0;
+    }
 }
