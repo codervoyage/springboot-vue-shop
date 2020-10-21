@@ -46,7 +46,7 @@
             <el-table-column prop="userSex" label="性别"></el-table-column>
             <el-table-column label="等级">
               <template v-slot="scope">
-                <el-tag v-if="scope.row.userGrade === 1">超级管理员</el-tag>
+                <el-tag v-if="scope.row.userGrade === 1">超级Vip用户</el-tag>
                 <el-tag type="info" v-else-if="scope.row.userGrade === 2">Vip用户</el-tag>
                 <el-tag type="warning" v-else>普通用户</el-tag>
               </template>

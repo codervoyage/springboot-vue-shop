@@ -8,4 +8,6 @@ public interface MallService {
     HashMap getBrand(Integer id, String name);
 
     HashMap deleteBrand(Integer id);
+
+    HashMap addBrand(String name, String test, String img, float low);
 }

@@ -37,7 +37,7 @@
             <el-table-column prop="name" label="品牌商名称"></el-table-column>
             <el-table-column prop="img" label="品牌商图片">
               <template v-slot="scope">
-                <img id="img" :src="getImgUrl(scope.row.img)" />
+                <img id="img" :src="imgSrc+scope.row.img"/>
               </template>
             </el-table-column>
             <el-table-column prop="test" label="介绍" width="400"></el-table-column>
@@ -59,33 +59,38 @@
     >
       <el-form :model="addForm" :rules="addFormRules" label-width="150px" style="width: 500px">
         <el-form-item label="品牌商名称" prop="name">
-          <el-input></el-input>
+          <el-input v-model="addForm.name"></el-input>
         </el-form-item>
         <el-form-item label="介绍">
-          <el-input></el-input>
+          <el-input v-model="addForm.test"></el-input>
         </el-form-item>
         <el-form-item label="图片">
           <el-upload
-              action="#"
+              :limit="addUploadLimit"
+              ref="addUpload"
+              action=""
+              :http-request="addUploadAction"
+              :file-list="addForm.img"
               list-type="picture-card"
               :auto-upload="false">
             <i slot="default" class="el-icon-plus"></i>
           </el-upload>
         </el-form-item>
         <el-form-item label="底价">
-          <el-input type="number"></el-input>
+          <el-input v-model="addForm.low" type="number"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          <el-button type="primary" @click="addBrand">确 定</el-button>
         </span>
     </el-dialog>
 
     <el-dialog
-        title="创建"
+        title="编辑"
         :visible.sync="updateDialogVisible"
         width="50%"
+        @close="updateDialogClosed"
     >
       <el-form :model="updateForm" :rules="addFormRules" label-width="150px" style="width: 500px">
         <el-form-item label="品牌商名称" prop="name">
@@ -96,7 +101,11 @@
         </el-form-item>
         <el-form-item label="图片">
           <el-upload
-              action="#"
+              :limit="addUploadLimit"
+              ref="upload"
+              :http-request="updateUploadAction"
+              :file-list="updateForm.img"
+              action=""
               list-type="picture-card"
               :auto-upload="false">
             <i slot="default" class="el-icon-plus"></i>
@@ -108,7 +117,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
           <el-button @click="updateDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="updateDialogVisible = false">确 定</el-button>
+          <el-button type="primary" @click="updateBrand">确 定</el-button>
         </span>
     </el-dialog>
   </div>
@@ -123,15 +132,23 @@ export default {
   data () {
     return {
       tableData: [],
+      imgSrc: '',
       brandId: '',
       brandName: '',
       dialogVisible: false,
       updateDialogVisible: false,
-      addForm: {},
+      addForm: {
+        name: '',
+        test: '',
+        img: [],
+        low: ''
+      },
+      // 添加=》图片上传限制1个
+      addUploadLimit: 1,
       updateForm: {
         name: '',
         test: '',
-        img: '',
+        img: [],
         low: 0
       },
       addFormRules: {
@@ -142,12 +159,12 @@ export default {
             trigger: 'blur'
           }
         ]
-      },
-      imgUrl: require('../../assets/img/mall/WMF.png')
+      }
     }
   },
   created () {
     this.getTableData()
+    this.imgSrc = this.$http.defaults.baseURL
   },
   methods: {
     async getTableData () {
@@ -175,14 +192,74 @@ export default {
       }
     },
     showBrandByDiaLog (brand) {
+      //点击编辑按钮  把需要回显的数据加载到dialog上
       this.updateForm.name = brand.name
       this.updateForm.test = brand.test
-      this.updateForm.img = brand.img
+      this.updateForm.img.push({ url: this.imgSrc + brand.img })
       this.updateForm.low = brand.low
       this.updateDialogVisible = true
-    },//获取图片路径
-    getImgUrl (img) {
-      return require('@/assets/img/mall/'+img)
+    },
+    updateDialogClosed () {
+      this.updateForm.img.splice(0, 1)
+    },
+    addBrand () {
+      this.$refs['addUpload'].submit()
+    },
+    updateBrand () {
+      this.$refs['upload'].submit()
+    },
+    async addUploadAction (uploadParams) {
+      const low = Number(this.addForm.low)
+      if (!Number.isNaN(low)) {
+        const formData = new FormData()
+        formData.append('file', uploadParams.file)
+        formData.append('name', this.addForm.name)
+        formData.append('test', this.addForm.test)
+        formData.append('low', this.addForm.low)
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+        const { data: res } = await this.$http.post('/brand/upload', formData, config)
+        if (res.meta.status === 200) {
+          this.dialogVisible = false
+          this.$message.success('添加成功')
+          this.getTableData()
+        }
+      }
+    },
+    async updateUploadAction (uploadParams) {
+      alert(this.updateForm.img.length)
+      if (this.updateForm.img.length === 0) {
+        this.$notify({
+          title: '提示',
+          message: '图片让你吃了？'
+        })
+        return
+      }
+      const low = Number(this.updateForm.low)
+      if (!Number.isNaN(low)) {
+        const formData = new FormData()
+        formData.append('file', uploadParams.file)
+        formData.append('name', this.updateForm.name)
+        formData.append('test', this.updateForm.test)
+        formData.append('low', this.updateForm.low)
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+        /*const { data: res } = await this.$http.post('/brand/update/upload', formData, config)
+        if (res.meta.status === 200) {
+          this.updateDialogVisible = false
+          this.$message.success('更新成功')
+          this.getTableData()
+        } else {
+          this.updateDialogVisible = false
+          this.$message.success('更新失败')
+        }*/
+      }
     },
     // 导出表格所用
     exportExcel () {

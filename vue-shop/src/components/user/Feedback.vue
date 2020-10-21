@@ -37,7 +37,7 @@
           <el-table-column prop="feedbackContent" label="反馈内容"></el-table-column>
           <el-table-column  prop="feedbackPicture" label="反馈图片">
             <template v-slot:="scope">
-              <img style="width:40px;height:40px;border:none;" :src="imgPage(scope.row.feedbackPicture)" class="head_pic">
+              <img style="width:40px;height:40px;border:none;" src="" class="head_pic">
             </template>
           </el-table-column>
           <el-table-column prop="feedbackTime" label="时间">
@@ -165,9 +165,9 @@ export default {
       return wbout
     },
     /*图片显示*/
-    imgPage(val){
+    /*imgPage(val){
       return require("@/assets/img/"+val);
-    }
+    }*/
   }
 }
 </script>

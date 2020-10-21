@@ -1,8 +1,7 @@
 package com.buba.dao;
 
-import com.buba.pojo.User;
+import com.buba.pojo.user.User;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

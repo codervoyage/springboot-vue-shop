@@ -99,6 +99,14 @@ public class UserController {
         }
     }
 
+    /**
+     * 反馈数据精确查找
+     * @param feedBackID
+     * @param userName
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/selectOne2")
     public HashMap selectOne2(Integer feedBackID, String userName,Integer currentPage, Integer pageSize){
         HashMap listMap = feedBackService.selectOne(feedBackID,userName,currentPage,pageSize);

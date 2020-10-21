@@ -7,7 +7,7 @@
         <result column="feedback_content" property="feedbackContent"></result>
         <result column="feedback_picture" property="feedbackPicture"></result>
         <result column="feedback_time" property="feedbackTime"></result>
-        <collection property="user" ofType="com.buba.pojo.User">
+        <collection property="user" ofType="com.buba.pojo.user.User">
             <result column="user_id" property="userId"></result>
             <result column="user_name" property="userName"></result>
             <result column="user_phone" property="userPhone"></result>

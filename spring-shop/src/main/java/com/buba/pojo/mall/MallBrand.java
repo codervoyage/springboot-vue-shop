@@ -1,4 +1,4 @@
-package com.buba.pojo;
+package com.buba.pojo.mall;
 
 public class MallBrand {
 

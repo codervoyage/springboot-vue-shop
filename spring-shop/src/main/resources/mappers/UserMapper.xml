@@ -15,6 +15,7 @@
             <if test="username != null and username != ''">
                 and user_name like concat('%',#{username},'%')
             </if>
+            and user_grade != 0
         </where>
         limit ${size * (page-1)},${size}
     </select>

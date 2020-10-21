@@ -1,13 +1,12 @@
 package com.buba.service.mall;
 
 import com.buba.dao.MallMapper;
-import com.buba.pojo.MallArea;
-import com.buba.pojo.MallBrand;
+import com.buba.pojo.mall.MallArea;
+import com.buba.pojo.mall.MallBrand;
 import com.buba.utils.RespMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +68,20 @@ public class MallServiceImp implements MallService {
         } else {
             res.put("data", null);
             res.put("meta", RespMsg.getStatus("删除失败", 400));
+        }
+        return res;
+    }
+
+    @Override
+    public HashMap addBrand(String name, String test, String img, float low) {
+        HashMap res = new HashMap();
+        int i = mallMapper.addBrand(name, test, img, low);
+        if (i > 0) {
+            res.put("img", img);
+            res.put("meta", RespMsg.getStatus("添加成功", 200));
+        } else {
+            res.put("data", null);
+            res.put("meta", RespMsg.getStatus("添加失败", 400));
         }
         return res;
     }

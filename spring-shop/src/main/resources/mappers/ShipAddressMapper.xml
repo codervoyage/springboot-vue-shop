@@ -7,7 +7,7 @@
     <result column="area" property="area"></result>
     <result column="address" property="address"></result>
     <result column="status" property="status"></result>
-    <collection property="user" ofType="com.buba.pojo.User">
+    <collection property="user" ofType="com.buba.pojo.user.User">
         <result column="user_id" property="userId"></result>
         <result column="user_name" property="userName"></result>
         <result column="user_phone" property="userPhone"></result>
