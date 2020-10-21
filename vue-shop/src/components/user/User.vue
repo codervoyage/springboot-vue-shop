@@ -46,9 +46,10 @@
             <el-table-column prop="userSex" label="性别"></el-table-column>
             <el-table-column label="等级">
               <template v-slot="scope">
-                <el-tag v-if="scope.row.userGrade === 1">超级管理员</el-tag>
-                <el-tag type="info" v-else-if="scope.row.userGrade === 2">Vip用户</el-tag>
-                <el-tag type="warning" v-else>普通用户</el-tag>
+                <el-tag v-if="scope.row.userGrade === 0">超级管理员</el-tag>
+                <el-tag type="info" v-else-if="scope.row.userGrade === 1">Vip用户</el-tag>
+                <el-tag type="warning" v-else-if="scope.row.userGrade === 2">普通用户</el-tag>
+                <el-tag type="warning" v-else-if="scope.row.userGrade === 3">新进用户</el-tag>
               </template>
             </el-table-column>
             <el-table-column label="状态">
@@ -59,7 +60,7 @@
             </el-table-column>
             <el-table-column label="操作">
               <template v-slot="scope">
-                <el-button type="primary" size="mini" @click="dialogVisible = true">详情</el-button>
+                <el-button type="primary" size="mini" @click=" selectAndUpdate(scope.row) ">详情</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -83,19 +84,63 @@
           </div>
         </el-col>
       </el-row>
+      <!--==================dialog弹出框======================-->
       <el-dialog
           title="用户编辑"
           :visible.sync="dialogVisible"
           width="40%"
       >
         <el-form :model="form" label-width="80px" style="width: 400px">
-          <el-form-item label="活动名称">
-            <el-input></el-input>
+
+          <el-form-item label="用户名">
+            <el-input v-model="form.userAccount" :disabled="true"></el-input>
           </el-form-item>
+
+          <el-form-item label="用户昵称">
+            <el-input v-model="form.userName"></el-input>
+          </el-form-item>
+
+          <el-form-item label="用户手机">
+            <el-input v-model="form.userPhone"></el-input>
+          </el-form-item>
+
+          <el-form-item label="用户性别">
+            <el-select v-model="form.userSex" placeholder="用户性别">
+              <el-option
+                  v-for="item in sex"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.label">
+              </el-option>
+            </el-select>
+          </el-form-item>
+
+          <el-form-item label="用户等级">
+            <el-select v-model="form.userGrade" placeholder="用户等级">
+              <el-option
+                  v-for="item in grade"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+
+          <el-form-item label="状态">
+            <el-select v-model="form.userState" placeholder="状态">
+              <el-option
+                  v-for="item in state"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+          <el-button type="primary" @click="submitDialog(form)">确 定</el-button>
         </span>
       </el-dialog>
     </el-card>
@@ -122,10 +167,19 @@ export default {
       inputUserName: '',
       // 控制dialog开关
       dialogVisible: false,
-      //
+      //dialog的form表单数据
       form:{
-
-      }
+        userName: '',
+        userAccount: '',
+        userPhone:'',
+        userSex:'',
+        userGrade:'',
+        userState:''
+      },
+      //dialog->from->几个下拉菜单的数据
+      sex:[{value: 0,label: '男'},{value: 1, label: '女'},],
+      grade:[{value: 0, label: '超级管理员'}, {value: 1, label: 'vip用户'}, {value: 2, label: '普通用户'},{value: 3, label: '新进用户'}],
+      state:[{value: 0, label: '不可用'},{value: 1,label: '可用'}]
     }
   },
   created () {
@@ -216,13 +270,44 @@ export default {
         if (typeof console !== 'undefined') console.log(e, wbout)
       }
       return wbout
+    },
+    /*查看详情*/
+    selectAndUpdate(val){
+      this.dialogVisible = true
+      this.form.userName=val.userName
+      this.form.userAccount=val.userAccount
+      this.form.userPhone=val.userPhone
+      this.form.userSex=val.userSex
+      this.form.userGrade=val.userGrade
+      this.form.userState=val.userState
+    },
+    /*提交dialog内form表单*/
+    async submitDialog(val){
+      this.dialogVisible = false
+      console.log(val);
+      if(val==null){
+        this.$notify.warning({
+          title: '提示',
+          message: '修改信息不正确'
+        })
+      }else {
+        const { data } = await this.$http.get('/updateUserOne', {
+              params: {
+                userName: val.userName,
+                userAccount:val.userAccount,
+                userPhone:val.userPhone,
+                userSex:val.userSex,
+                userGrade:val.userGrade,
+                userState:val.userState
+              }
+            })
+        this.$notify.success({
+          title: '提示',
+          message: '修改成功'
+        })
+        this.getUserList()
+      }
     }
-    ,
-    //点击按钮查看详情。可修改数据，重新提交
-    updateUser (userInfo) {
-
-    }
-    //
   }
 }
 </script>

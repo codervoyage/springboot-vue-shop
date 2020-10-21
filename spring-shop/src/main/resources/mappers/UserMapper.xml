@@ -3,7 +3,7 @@
 <mapper namespace="com.buba.dao.UserServiceMapper">
     <select id="getUserList" resultType="user">
         select
-        user_id,user_name,user_phone,user_sex,user_grade,user_state
+        user_id,user_name,user_account,user_phone,user_sex,user_grade,user_state
         from user
         <where>
             <if test="userId != null and userId != ''">
@@ -34,5 +34,15 @@
             </if>
         </where>
     </select>
+
+    <update id="updateUserOne" parameterType="com.buba.pojo.User">
+		update user set
+		user_name=#{user.userName},
+		user_phone=${user.userPhone},
+		user_sex=#{user.userSex},
+		user_grade=${user.userGrade},
+		user_state=${user.userState}
+		where user_account = #{user.userAccount}
+    </update>
 
 </mapper>

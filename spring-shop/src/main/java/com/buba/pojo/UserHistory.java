@@ -6,7 +6,9 @@ public class UserHistory {
   private Integer id;
   private Integer uid;
   private String keyword;
-  private java.sql.Timestamp selectTime;
+  private String selectTime;
+
+  private User user;
 
 
   public long getId() {
@@ -36,12 +38,19 @@ public class UserHistory {
   }
 
 
-  public java.sql.Timestamp getSelectTime() {
+  public String getSelectTime() {
     return selectTime;
   }
 
-  public void setSelectTime(java.sql.Timestamp selectTime) {
+  public void setSelectTime(String selectTime) {
     this.selectTime = selectTime;
   }
 
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
 }

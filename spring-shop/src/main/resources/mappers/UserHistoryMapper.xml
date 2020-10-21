@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buba.dao.UserHistoryMapper">
+    <resultMap id="UH" type="com.buba.pojo.UserHistory">
+        <result column="id" property="id"></result>
+        <result column="uid" property="uid"></result>
+        <result column="keyword" property="keyword"></result>
+        <result column="selectTime" property="selectTime"></result>
+        <collection property="user" ofType="com.buba.pojo.User">
+            <result column="user_id" property="userId"></result>
+            <result column="user_name" property="userName"></result>
+        </collection>
+    </resultMap>
+
+    <select id="limitHistory" resultMap="UH">
+        SELECT * FROM user_history AS uh, user AS us
+        WHERE uh.uid = us.user_id
+        <if test="id!=0 and id!=null">
+            and uh.uid=${id}
+        </if>
+        <if test="keyword!=null and keyword!=''">
+            and uh.keyword like concat('%',#{keyword},'%')
+        </if>
+        LIMIT ${pageSize * (currentPage-1)},${pageSize}
+    </select>
+
+    <select id="same" resultType="java.lang.Integer">
+        SELECT count(*) FROM user_history AS uh, user AS us
+        WHERE uh.uid = us.user_id
+        <if test="searchID!=0 and searchID!=null">
+            and uh.id=${searchID}
+        </if>
+        <if test="keyword!=null and keyword!=''">
+            and uh.keyword like concat('%',#{keyword},'%')
+        </if>
+    </select>
+</mapper>
