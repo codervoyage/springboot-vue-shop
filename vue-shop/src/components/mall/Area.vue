@@ -14,8 +14,8 @@
                     <el-table-column>
                       <template v-slot="scope">
                         <el-tag v-if="scope.row.level === 1">省</el-tag>
-                        <el-tag v-else-if="scope.row.level === 2" type="success">市</el-tag>
-                        <el-tag v-else type="warning">县</el-tag>
+                        <el-tag v-if="scope.row.level === 2" type="success">市</el-tag>
+                        <el-tag v-if="scope.row.level === 3" type="warning">区</el-tag>
                       </template>
                     </el-table-column>
                     <el-table-column
@@ -30,8 +30,8 @@
               <el-table-column>
                 <template v-slot="scope">
                   <el-tag v-if="scope.row.level === 1">省</el-tag>
-                  <el-tag v-else-if="scope.row.level === 2" type="success">市</el-tag>
-                  <el-tag v-else type="warning">县</el-tag>
+                  <el-tag v-if="scope.row.level === 2" type="success">市</el-tag>
+                  <el-tag v-if="scope.row.level === 3" type="warning">区</el-tag>
                 </template>
               </el-table-column>
               <el-table-column
@@ -47,8 +47,8 @@
         <el-table-column label="区域类型">
           <template v-slot="scope">
             <el-tag v-if="scope.row.level === 1">省</el-tag>
-            <el-tag v-else-if="scope.row.level === 2" type="success">市</el-tag>
-            <el-tag v-else type="warning">区</el-tag>
+            <el-tag v-if="scope.row.level === 2" type="success">市</el-tag>
+            <el-tag v-if="scope.row.level === 3" type="warning">区</el-tag>
           </template>
         </el-table-column>
         <el-table-column

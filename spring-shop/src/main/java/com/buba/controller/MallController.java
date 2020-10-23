@@ -2,42 +2,58 @@ package com.buba.controller;
 
 import com.buba.service.mall.MallService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 public class MallController {
     @Autowired
     private MallService mallService;
 
-    @PostMapping(value = "/brand/upload")
-    public HashMap upload(MultipartFile file, String name, String test, float low, HttpServletRequest request) {
-        /*获取文件名*/
-        String fileName = file.getOriginalFilename();
-        /*获取新文件名*/
-        char c = (char) (int) (Math.random() * 26 + 97);
-        String imgName = c + System.currentTimeMillis() + "";
-        /*获取文件后缀名*/
-        String exName = fileName.substring(fileName.lastIndexOf("."));
-        /*上传==>url+新文件名字+文件后缀*/
-        try {
-            String url = ResourceUtils.getURL("classpath:").getPath() + "static/mall/";
-            file.transferTo(new File(url + imgName + exName));
-        } catch (Exception e) {
-            e.printStackTrace();
+    @PostMapping(value = "/brand/upload/{flag}")
+    public HashMap upload(@PathVariable String flag, MultipartFile file, String name, String test, float low, Integer id) {
+        HashMap res = null;
+        if (flag.equals("add")) {
+            /*获取文件名*/
+            String fileName = file.getOriginalFilename();
+            /*获取新文件名*/
+            char c = (char) (int) (Math.random() * 26 + 97);
+            String imgName = c + System.currentTimeMillis() + "";
+            /*获取文件后缀名*/
+            String exName = fileName.substring(fileName.lastIndexOf("."));
+            /*上传==>url+新文件名字+文件后缀*/
+            try {
+                String url = ResourceUtils.getURL("classpath:").getPath() + "static/mall/";
+                file.transferTo(new File(url + imgName + exName));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String img = "mall/" + imgName + exName;
+            res = mallService.addBrand(name, test, img, low);
+        } else {
+            /*获取文件名*/
+            String fileName = file.getOriginalFilename();
+            /*获取新文件名*/
+            char c = (char) (int) (Math.random() * 26 + 97);
+            String imgName = c + System.currentTimeMillis() + "";
+            /*获取文件后缀名*/
+            String exName = fileName.substring(fileName.lastIndexOf("."));
+            /*上传==>url+新文件名字+文件后缀*/
+            try {
+                String targetUrl = ResourceUtils.getURL("classpath:").getPath() + "static/mall/";
+                file.transferTo(new File(targetUrl + imgName + exName));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String img = "mall/" + imgName + exName;
+            res = mallService.updateBrand(id, name, test, img, low);
         }
-        String img = "mall/" + imgName + exName;
-        return mallService.addBrand(name, test, img, low);
+        return res;
     }
 
     /**

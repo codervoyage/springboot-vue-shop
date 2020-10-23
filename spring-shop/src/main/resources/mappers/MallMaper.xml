@@ -12,5 +12,10 @@
             </if>
         </where>
     </select>
-
+    <update id="updateBrand">
+        update mall_brand set `name` = #{name},test = #{test},img = #{img},low=#{low}
+        <where>
+            id = #{id}
+        </where>
+    </update>
 </mapper>

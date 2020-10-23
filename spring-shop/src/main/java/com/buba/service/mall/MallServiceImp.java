@@ -85,4 +85,18 @@ public class MallServiceImp implements MallService {
         }
         return res;
     }
+
+    @Override
+    public HashMap updateBrand(Integer id, String name, String test, String img, float low) {
+        HashMap res = new HashMap();
+        int i = mallMapper.updateBrand(id, name, test, img, low);
+        if (i > 0) {
+            res.put("img", img);
+            res.put("meta", RespMsg.getStatus("修改成功", 200));
+        } else {
+            res.put("data", null);
+            res.put("meta", RespMsg.getStatus("修改失败", 400));
+        }
+        return res;
+    }
 }

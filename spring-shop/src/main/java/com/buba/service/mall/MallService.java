@@ -10,4 +10,6 @@ public interface MallService {
     HashMap deleteBrand(Integer id);
 
     HashMap addBrand(String name, String test, String img, float low);
+
+    HashMap updateBrand(Integer id, String name, String test, String img, float low);
 }

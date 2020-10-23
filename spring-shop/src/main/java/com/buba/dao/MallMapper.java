@@ -14,9 +14,18 @@ import java.util.ArrayList;
 public interface MallMapper {
     @Select("select * from mall_area")
     ArrayList<MallArea> getArea();
-    ArrayList<MallBrand> getBrand(@Param("id")Integer id,@Param("name") String name);
+
+    ArrayList<MallBrand> getBrand(@Param("id") Integer id, @Param("name") String name);
+
     @Delete("delete from mall_brand where id = #{id}")
     int deleteBrand(@Param("id") Integer id);
+
     @Insert("insert into mall_brand(name,img,test,low) values (#{name},#{img},#{test},#{low})")
     int addBrand(String name, String test, String img, float low);
+
+    int updateBrand(@Param("id") Integer id,
+                    @Param("name") String name,
+                    @Param("test") String test,
+                    @Param("img") String img,
+                    @Param("low") float low);
 }

@@ -107,7 +107,8 @@
               :file-list="updateForm.img"
               action=""
               list-type="picture-card"
-              :auto-upload="false">
+              :auto-upload="false"
+          >
             <i slot="default" class="el-icon-plus"></i>
           </el-upload>
         </el-form-item>
@@ -146,6 +147,7 @@ export default {
       // 添加=》图片上传限制1个
       addUploadLimit: 1,
       updateForm: {
+        id: 0,
         name: '',
         test: '',
         img: [],
@@ -193,6 +195,7 @@ export default {
     },
     showBrandByDiaLog (brand) {
       //点击编辑按钮  把需要回显的数据加载到dialog上
+      this.updateForm.id = brand.id
       this.updateForm.name = brand.name
       this.updateForm.test = brand.test
       this.updateForm.img.push({ url: this.imgSrc + brand.img })
@@ -207,6 +210,7 @@ export default {
     },
     updateBrand () {
       this.$refs['upload'].submit()
+
     },
     async addUploadAction (uploadParams) {
       const low = Number(this.addForm.low)
@@ -221,7 +225,7 @@ export default {
             'Content-Type': 'multipart/form-data'
           }
         }
-        const { data: res } = await this.$http.post('/brand/upload', formData, config)
+        const { data: res } = await this.$http.post('/brand/upload/add', formData, config)
         if (res.meta.status === 200) {
           this.dialogVisible = false
           this.$message.success('添加成功')
@@ -230,18 +234,12 @@ export default {
       }
     },
     async updateUploadAction (uploadParams) {
-      alert(this.updateForm.img.length)
-      if (this.updateForm.img.length === 0) {
-        this.$notify({
-          title: '提示',
-          message: '图片让你吃了？'
-        })
-        return
-      }
+      alert(1)
       const low = Number(this.updateForm.low)
       if (!Number.isNaN(low)) {
         const formData = new FormData()
         formData.append('file', uploadParams.file)
+        formData.append('id', this.updateForm.id)
         formData.append('name', this.updateForm.name)
         formData.append('test', this.updateForm.test)
         formData.append('low', this.updateForm.low)
@@ -250,7 +248,7 @@ export default {
             'Content-Type': 'multipart/form-data'
           }
         }
-        /*const { data: res } = await this.$http.post('/brand/update/upload', formData, config)
+        const { data: res } = await this.$http.post('/brand/upload/update', formData, config)
         if (res.meta.status === 200) {
           this.updateDialogVisible = false
           this.$message.success('更新成功')
@@ -258,7 +256,7 @@ export default {
         } else {
           this.updateDialogVisible = false
           this.$message.success('更新失败')
-        }*/
+        }
       }
     },
     // 导出表格所用
