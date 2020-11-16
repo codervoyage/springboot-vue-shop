@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ShipAddress from "@/components/user/ShipAddress";
+const ShipAddress = () => import('../components/user/ShipAddress.vue')
 const Login = () => import('../components/Login')
 const Home = () => import('../components/Home')
 const Welcome = () => import('../components/Welcome')
@@ -21,17 +21,15 @@ const routes = [
     /*子路由*/
     children:[
         /*路径*/
-      {path: '/dashboard',component:Welcome},
-      {path: '/user/user',component:User},
-      {path: '/user/address',component:ShipAddress},
-      {path:'/dashboard',component:Welcome},
-      {path: '/user/user',component:User},
-      {path: '/user/history',component:History},
-      {path: '/profile/password',component:Test},
-      {path: '/user/feedback',component:Feedback},
-      {path: '/mall/brand',component:Brand},
-      {path: '/mall/region',component:Area},
-      {path: '/mall/category',component:Category}
+      {path: '/dashboard',component:Welcome,name:'首页'},
+      {path: '/user/address',component:ShipAddress,name: '收货地址'},
+      {path: '/user/user',component:User,name: '会员管理'},
+      {path: '/user/history',component:History,name: '搜索历史'},
+      {path: '/profile/password',component:Test,name: '修改信息'},
+      {path: '/user/feedback',component:Feedback,name: '意见反馈'},
+      {path: '/mall/brand',component:Brand,name: '品牌制造商'},
+      {path: '/mall/region',component:Area,name: '行政区域'},
+      {path: '/mall/category',component:Category,name: '商品类目'}
     ]
   }
 ]

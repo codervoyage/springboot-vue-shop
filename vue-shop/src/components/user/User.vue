@@ -184,10 +184,10 @@ export default {
         value: 1,
         label: '女'
       },],
-      grade: [{
+      grade: [/*{
         value: 0,
         label: '超级管理员'
-      }, {
+      },*/ {
         value: 1,
         label: 'vip用户'
       }, {

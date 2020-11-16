@@ -13,11 +13,12 @@ import Axios from 'axios'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 Vue.use(NProgress)
-
+//导入vuex
+import store from './store/index'
 // 在全局定义了一个时间过滤器组件
 Vue.filter('dateFormat', timeStamp => {
   if (!timeStamp) return ''
-  const time = new Date(timeStamp * 1)
+  const time = new Date(timeStamp)
   const y = time.getFullYear()
   const m = (time.getMonth() + 1 + '').padStart(2, '0')
   const d = (time.getDate() + '').padStart(2, '0')
@@ -40,5 +41,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

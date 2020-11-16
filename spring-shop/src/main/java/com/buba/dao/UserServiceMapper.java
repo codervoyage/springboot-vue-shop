@@ -16,5 +16,5 @@ public interface UserServiceMapper {
 
     Integer getTotal(Integer userId, String username, Integer phone);
 
-    int updateUserOne(@Param("static/user") User user);
+    int updateUserOne( User user);
 }

@@ -1,14 +1,12 @@
 package com.buba.controller;
 
 import com.buba.pojo.user.User;
+import com.buba.service.user.FeedBackService;
 import com.buba.service.user.ShipAddressService;
 import com.buba.service.user.UserHistoryService;
 import com.buba.service.user.UserService;
-import com.buba.service.user.FeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -115,12 +113,7 @@ public class UserController {
     }
 
     /**
-<<<<<<< HEAD
      * 反馈数据精确查找
-=======
-     * 意见反馈精确查询
-     *
->>>>>>> 62f973db9f3afd1f08fca182d4ea6f2b119c78dd
      * @param feedBackID
      * @param userName
      * @param currentPage
