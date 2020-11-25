@@ -33,7 +33,7 @@
           <el-table id="table"
                     :data="tableData"
                     border>
-            <el-table-column prop="id" label="品牌商ID"></el-table-column>
+            <el-table-column prop="bId" label="品牌商ID"></el-table-column>
             <el-table-column prop="name" label="品牌商名称"></el-table-column>
             <el-table-column prop="img" label="品牌商图片">
               <template v-slot="scope">
@@ -180,6 +180,7 @@ export default {
         })
         if (res.meta.status === 200) {
           this.tableData = res.data
+          console.log(res);
         }
       }
     },

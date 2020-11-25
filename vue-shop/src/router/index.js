@@ -11,6 +11,9 @@ const Feedback = () => import('../components/user/Feedback')
 const Area = () => import('../components/mall/Area')
 const Brand = () => import('../components/mall/Brand')
 const Category = () => import('../components/mall/Category')
+const GoodsShow = () => import('../components/goods/Goodsshow')
+const GoodsAdd = () => import('../components/goods/GoodsAdd')
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -29,7 +32,9 @@ const routes = [
       {path: '/user/feedback',component:Feedback,name: '意见反馈'},
       {path: '/mall/brand',component:Brand,name: '品牌制造商'},
       {path: '/mall/region',component:Area,name: '行政区域'},
-      {path: '/mall/category',component:Category,name: '商品类目'}
+      {path: '/mall/category',component:Category,name: '商品类目'},
+      {path: '/goods/list',component:GoodsShow,name: '商品列表'},
+      {path: '/goods/create',component:GoodsAdd,name: '商品上架'}
     ]
   }
 ]
