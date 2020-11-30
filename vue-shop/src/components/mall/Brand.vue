@@ -125,9 +125,6 @@
 </template>
 
 <script>
-import FileSaver from 'file-saver'
-import XLSX from 'xlsx'
-
 export default {
   name: 'Brand',
   data () {
@@ -262,39 +259,12 @@ export default {
     },
     // 导出表格所用
     exportExcel () {
-      // 设置当前日期
-      let time = new Date()
-      let year = time.getFullYear()
-      let month = time.getMonth() + 1
-      let day = time.getDate()
-      let name = year + '' + month + '' + day
-      /* generate workbook object from table */
-      let xlsxParam = { raw: true } //转换成excel时，使用原始的格式
-      /* 从表生成工作簿对象 */
-      let wb = XLSX.utils.table_to_book(
-          document.querySelector('#table'),  //elementui 表格的id
-          xlsxParam
-      )
-      /* 获取二进制字符串作为输出 */
-      var wbout = XLSX.write(wb, {
-        bookType: 'xlsx',
-        bookSST: true,
-        type: 'array'
+      import('../../plugins/Export2Excel').then(excel => {
+        const tHeader = ['品牌商ID', '品牌商名称', '介绍', '底价']
+        const filterVal = ['bId', 'name', 'test', 'low']
+        excel.export_json_to_excel2(tHeader, this.tableData, filterVal, '品牌制造商信息')
       })
-      try {
-        FileSaver.saveAs(
-            //Blob 对象表示一个不可变、原始数据的类文件对象。
-            //Blob 表示的不一定是JavaScript原生格式的数据。
-            //File 接口基于Blob，继承了 blob 的功能并将其扩展使其支持用户系统上的文件。
-            //返回一个新创建的 Blob 对象，其内容由参数中给定的数组串联组成。
-            new Blob([wbout], { type: 'application/octet-stream' }),
-            //设置导出文件名称
-            name + '商品制造商' + '.xlsx'
-        )
-      } catch (e) {
-        if (typeof console !== 'undefined') console.log(e, wbout)
-      }
-      return wbout
+
     }
   }
 }

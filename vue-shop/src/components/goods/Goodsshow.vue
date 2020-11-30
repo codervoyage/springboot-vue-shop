@@ -40,10 +40,10 @@
               <span>{{ props.row.keyword }}</span>
             </el-form-item>
             <el-form-item label="类目ID">
-              <span>{{ props.row.mallBrand.id}}</span>
+              <span>{{ props.row.mallCategory.id}}</span>
             </el-form-item>
             <el-form-item label="品牌商ID">
-              <span>{{ props.row.mallCategory.id }}</span>
+              <span>{{ props.row.mallBrand.bId }}</span>
             </el-form-item>
           </el-form>
         </template>

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 @Repository
 public interface MallMapper {
-    @Select("select * from mall_area")
+    @Select("select * from mall_area where level = 1")
     ArrayList<MallArea> getArea();
 
     ArrayList<MallBrand> getBrand(@Param("id") Integer id, @Param("name") String name);
@@ -28,4 +28,6 @@ public interface MallMapper {
                     @Param("test") String test,
                     @Param("img") String img,
                     @Param("low") float low);
+    @Select("select * from mall_area where parent_id = #{id}")
+    ArrayList<MallArea> getArea2(Integer id);
 }

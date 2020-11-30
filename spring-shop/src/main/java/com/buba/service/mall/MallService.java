@@ -12,4 +12,6 @@ public interface MallService {
     HashMap addBrand(String name, String test, String img, float low);
 
     HashMap updateBrand(Integer id, String name, String test, String img, float low);
+
+    HashMap getArea2(Integer id);
 }
