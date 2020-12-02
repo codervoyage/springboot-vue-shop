@@ -38,12 +38,12 @@
 
     <update id="updateUserOne" parameterType="com.buba.pojo.user.User">
 		update user set
-		user_name=#{user.userName},
-		user_phone=${user.userPhone},
-		user_sex=#{user.userSex},
-		user_grade=${user.userGrade},
-		user_state=${user.userState}
-		where user_account = #{user.userAccount}
+		user_name=#{userName},
+		user_phone=${userPhone},
+		user_sex=#{userSex},
+		user_grade=${userGrade},
+		user_state=${userState}
+		where user_account = #{userAccount}
     </update>
     <select id="selectOnetext" resultType="user">
         select

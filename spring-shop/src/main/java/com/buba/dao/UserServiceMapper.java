@@ -18,7 +18,8 @@ public interface UserServiceMapper {
 
     Integer getTotal(Integer userId, String username, Integer phone);
 
-    int updateUserOne(@Param("static/user") User user);
+
+    /*int updateUserOne(@Param("static/user") User user);*/
 
     @Select("select * from user")
     List<User> selectAll();
@@ -30,4 +31,6 @@ public interface UserServiceMapper {
 
     @Delete("delete from user where user_id = #{id}")
     int delcateTest(Integer id);
+
+    int updateUserOne( User user);
 }

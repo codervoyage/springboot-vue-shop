@@ -27,4 +27,7 @@ public interface MallService {
     int delCate(Integer id);
 
     int updateCateGory(MallCategory mallCategory);
+
+    HashMap getArea2(Integer id);
+
 }

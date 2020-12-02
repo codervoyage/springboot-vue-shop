@@ -10,7 +10,6 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.*;
 
@@ -68,6 +67,11 @@ public class MallController {
     @GetMapping(value = "/mall/getArea")
     public HashMap getArea() {
         return mallService.getArea();
+    }
+
+    @GetMapping(value = "/mall/getArea/by_id")
+    public HashMap getAreaByid(Integer id) {
+        return mallService.getArea2(id);
     }
 
     /**

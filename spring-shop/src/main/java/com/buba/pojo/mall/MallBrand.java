@@ -2,21 +2,20 @@ package com.buba.pojo.mall;
 
 public class MallBrand {
 
-  private Integer id;
+  private Integer bId;
   private String name;
   private String img;
   private String test;
   private double low;
 
 
-  public long getId() {
-    return id;
+  public Integer getbId() {
+    return bId;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
+  public void setbId(Integer bId) {
+    this.bId = bId;
   }
-
 
   public String getName() {
     return name;
@@ -26,7 +25,6 @@ public class MallBrand {
     this.name = name;
   }
 
-
   public String getImg() {
     return img;
   }
@@ -34,7 +32,6 @@ public class MallBrand {
   public void setImg(String img) {
     this.img = img;
   }
-
 
   public String getTest() {
     return test;
@@ -44,7 +41,6 @@ public class MallBrand {
     this.test = test;
   }
 
-
   public double getLow() {
     return low;
   }
@@ -52,5 +48,4 @@ public class MallBrand {
   public void setLow(double low) {
     this.low = low;
   }
-
 }

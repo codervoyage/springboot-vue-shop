@@ -2,6 +2,7 @@ package com.buba.pojo.mall;
 
 
 import java.util.ArrayList;
+
 import java.util.Map;
 
 public class MallCategory {

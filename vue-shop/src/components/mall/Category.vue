@@ -275,10 +275,9 @@ export default {
       const { data } = await this.$http.get('/mall/category/delCate',{
         params:{
           id:id
-        }}).then(res =>{
-        this.$message.success("删除成功"+res.data)
+        }})
+        this.$message.success("删除成功"+data)
         this.getTable()
-      })
     },
     //修改弹框
     update(val){

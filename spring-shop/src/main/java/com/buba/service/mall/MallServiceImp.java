@@ -23,7 +23,7 @@ public class MallServiceImp implements MallService {
     public HashMap getArea() {
         HashMap res = new HashMap();
         ArrayList<MallArea> list = mallMapper.getArea();
-        List<MallArea> threeLevel = list.stream().filter(x -> x.getLevel().equals(3)).collect(Collectors.toList());
+        /*List<MallArea> threeLevel = list.stream().filter(x -> x.getLevel().equals(3)).collect(Collectors.toList());
         List<MallArea> twoLevel = list.stream().filter(x -> x.getLevel().equals(2)).collect(Collectors.toList());
         List<MallArea> oneLevel = list.stream().filter(x -> x.getLevel().equals(1)).collect(Collectors.toList());
         ArrayList<MallArea> result = null;
@@ -44,8 +44,17 @@ public class MallServiceImp implements MallService {
                 }
             }
             one.setChildren(result);
-        }
-        res.put("data", oneLevel);
+        }*/
+        res.put("data", list);
+        res.put("meta", RespMsg.getStatus("获取成功", 200));
+        return res;
+    }
+
+    @Override
+    public HashMap getArea2(Integer id) {
+        HashMap res = new HashMap();
+        ArrayList<MallArea> list = mallMapper.getArea2(id);
+        res.put("data", list);
         res.put("meta", RespMsg.getStatus("获取成功", 200));
         return res;
     }
@@ -146,5 +155,4 @@ public class MallServiceImp implements MallService {
     public int updateCateGory(MallCategory mallCategory) {
         return mallMapper.updateCateGory(mallCategory);
     }
-
 }

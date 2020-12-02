@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.buba.dao.GoodsMapper">
+    <resultMap id="QL" type="GoodList" autoMapping="true">
+        <association property="mallBrand" javaType="com.buba.pojo.mall.MallBrand" autoMapping="true"> </association>
+        <association property="mallCategory" javaType="com.buba.pojo.mall.MallCategory" autoMapping="true"></association>
+        <collection property="goodsPropagate" javaType="List"  ofType="com.buba.pojo.goods.GoodsPropagate" autoMapping="true">
+        </collection>
+    </resultMap>
+    <select  id="queryGoodsList" resultMap="QL">
+        SELECT
+        *
+        FROM
+        goods_propagate p
+        RIGHT JOIN (
+        SELECT
+        g.goods_id,
+        g.goods_name,
+        b.`name`,
+        c.type_name,
+        g.goods_pic,
+        g.goods_detail,
+        g.goods_price,
+        g.classific_id,
+        g.goods_unit,
+        g.market_price,
+        g.brand_id,
+        g.is_new,
+        g.is_hot,
+        g.is_sells,
+        c.id ,
+        b.b_id
+        FROM
+        goods_list g,
+        mall_brand b,
+        mall_category c
+        <where>
+            g.brand_id=b.b_id and g.classific_id=c.id
+            <if test="goodsName != null and goodsName != ''">
+                and g.goods_name like concat('%',#{goodsName},'%')
+            </if>
+            <if test="goodsId != null and goodsId != ''">
+                and g.goods_id = #{goodsId}
+            </if>
+            <if test="classificId != null and classificId != ''">
+                and g.classific_id = #{classificId}
+            </if>
+        </where>
+        ) a ON a.goods_id = p.g_id
+
+    </select>
+
+</mapper>
