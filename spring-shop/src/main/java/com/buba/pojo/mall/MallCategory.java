@@ -1,6 +1,8 @@
 package com.buba.pojo.mall;
 
 
+import java.util.ArrayList;
+
 import java.util.Map;
 
 public class MallCategory {
@@ -13,7 +15,15 @@ public class MallCategory {
   private String typeKeyword;
   private String typeContent;
   private long typeGrade;
+  private ArrayList<MallCategory> children;
 
+  public ArrayList<MallCategory> getChildren() {
+    return children;
+  }
+
+  public void setChildren(ArrayList<MallCategory> children) {
+    this.children = children;
+  }
 
   public long getId() {
     return id;

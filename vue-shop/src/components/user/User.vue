@@ -90,11 +90,13 @@
           :visible.sync="dialogVisible"
           width="40%"
       >
+
         <el-form :model="form" label-width="80px" style="width: 400px">
 
           <el-form-item label="用户名">
             <el-input v-model="form.userAccount" :disabled="true"></el-input>
           </el-form-item>
+
 
           <el-form-item label="用户昵称">
             <el-input v-model="form.userName"></el-input>
@@ -138,6 +140,7 @@
           </el-form-item>
 
         </el-form>
+
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="submitDialog(form)">确 定</el-button>
@@ -230,6 +233,7 @@ export default {
                 'phone': phone
               }
             })
+        this.tableData = res.data
         this.tableData = res.data
         this.total = res.total
       }

@@ -1,5 +1,6 @@
 package com.buba.springshop;
 
+import com.buba.pojo.user.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -10,6 +11,14 @@ import java.util.ArrayList;
 class SpringShopApplicationTests {
     @Test
     void contextLoads() {
+        int u =1;
+        System.out.println(u);
+        a(u);
+        System.out.println(u);
+    }
+
+    private void a (Integer u){
+        u=2;
         /*File file = new File("C:/Users/Rainbow/Desktop/a.txt");
         File file2 = new File("C:/Users/Rainbow/Desktop/b.txt");
         try {

@@ -35,7 +35,6 @@
                             </el-menu-item>
                         </el-submenu>
                     </template>
-
                 </el-menu>
             </el-row>
         </el-aside>
