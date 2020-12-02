@@ -17,7 +17,7 @@ public interface MallMapper {
 
     ArrayList<MallBrand> getBrand(@Param("id") Integer id, @Param("name") String name);
 
-    @Delete("delete from mall_brand where id = #{id}")
+    @Delete("delete from mall_brand where b_id = #{id}")
     int deleteBrand(@Param("id") Integer id);
 
     @Insert("insert into mall_brand(name,img,test,low) values (#{name},#{img},#{test},#{low})")

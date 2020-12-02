@@ -5,7 +5,7 @@
         select * from mall_brand
         <where>
             <if test="id != null and id != ''">
-                and id = #{id}
+                and b_id like concat('%',#{id},'%')
             </if>
             <if test="name != null and name != ''">
                 and `name` like concat('%',#{name},'%')
@@ -15,7 +15,7 @@
     <update id="updateBrand">
         update mall_brand set `name` = #{name},test = #{test},img = #{img},low=#{low}
         <where>
-            id = #{id}
+            b_id = #{id}
         </where>
     </update>
 </mapper>

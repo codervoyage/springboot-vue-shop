@@ -13,6 +13,7 @@ const Brand = () => import('../components/mall/Brand')
 const Category = () => import('../components/mall/Category')
 const GoodsShow = () => import('../components/goods/Goodsshow')
 const GoodsAdd = () => import('../components/goods/GoodsAdd')
+const Comment = () => import('../components/goods/Comment')
 
 Vue.use(VueRouter)
 
@@ -34,7 +35,8 @@ const routes = [
       {path: '/mall/region',component:Area,name: '行政区域'},
       {path: '/mall/category',component:Category,name: '商品类目'},
       {path: '/goods/list',component:GoodsShow,name: '商品列表'},
-      {path: '/goods/create',component:GoodsAdd,name: '商品上架'}
+      {path: '/goods/create',component:GoodsAdd,name: '商品上架'},
+      {path: '/goods/comment',component:Comment,name: '商品评论'}
     ]
   }
 ]
