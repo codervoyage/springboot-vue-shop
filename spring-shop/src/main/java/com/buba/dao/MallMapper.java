@@ -2,6 +2,7 @@ package com.buba.dao;
 
 import com.buba.pojo.mall.MallArea;
 import com.buba.pojo.mall.MallBrand;
+import com.buba.pojo.mall.MallCategory;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,19 @@ public interface MallMapper {
                     @Param("test") String test,
                     @Param("img") String img,
                     @Param("low") float low);
+
+    ArrayList<MallCategory> getCategory();
+
+    @Select("select * from mall_category where fid=0")
+    ArrayList<MallCategory> getCateGoryflm();
+
+    int addCateGory(@Param("category") MallCategory category);
+
+    @Select("select count(*) from mall_category where fid=#{id}")
+    int selectSon(@Param("id") Integer i);
+
+    @Delete("delete from mall_category where id= #{id}")
+    int delCate(@Param("id") Integer id);
+
+    int updateCateGory(@Param("category")MallCategory mallCategory);
 }

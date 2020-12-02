@@ -11,8 +11,8 @@
             :collapse="isCollapse"
             :collapse-transition="false"
             :default-active="this.$route.path"
-            :unique-opened="true"
-        ><!--unique-opened控制是否可以展开多个一级菜单-->
+            :unique-opened="true">
+          <!--unique-opened控制是否可以展开多个一级菜单-->
           <template v-for="item in menuList">
             <el-menu-item v-if="item.id===1" :key='item.id' :index="item.path">
               <template slot="title">

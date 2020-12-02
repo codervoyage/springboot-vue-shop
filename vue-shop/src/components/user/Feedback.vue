@@ -37,7 +37,7 @@
           <el-table-column prop="feedbackContent" label="反馈内容"></el-table-column>
           <el-table-column  prop="feedbackPicture" label="反馈图片">
             <template v-slot:="scope">
-              <img style="width:40px;height:40px;border:none;" src="" class="head_pic">
+              <img style="width:40px;height:40px;border:none;" :src="imgSrc+scope.row.feedbackPicture" class="head_pic">
             </template>
           </el-table-column>
           <el-table-column prop="feedbackTime" label="时间">
@@ -80,12 +80,14 @@ export default {
       tableData:[],
       currentPage:1,
       pageSize:4,
-      listMunber:0
+      listMunber:0,
+      imgSrc:''
     }
   },
   created() {
     this.getTable(this.currentPage,this.pageSize)
     this.gitNumber()
+    this.imgSrc = this.$http.defaults.baseURL
   },
   methods:{
     /*根据给出的关键词去精确查找*/

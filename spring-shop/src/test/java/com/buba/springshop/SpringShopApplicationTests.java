@@ -1,5 +1,6 @@
 package com.buba.springshop;
 
+import com.buba.pojo.user.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,13 +18,14 @@ import java.net.URL;
 class SpringShopApplicationTests {
     @Test
     void contextLoads() {
+        int u =1;
+        System.out.println(u);
+        a(u);
+        System.out.println(u);
+    }
 
-        try {
-            System.out.println(ResourceUtils.getURL("classpath:").getPath() + "static/mall/");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
+    private void a (Integer u){
+        u=2;
     }
 }
 

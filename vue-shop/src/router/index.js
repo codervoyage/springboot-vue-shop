@@ -31,7 +31,7 @@ const routes = [
       {path: '/user/feedback',component:Feedback},
       {path: '/mall/brand',component:Brand},
       {path: '/mall/region',component:Area},
-      {path: '/mall/category',component:Category}
+      {path: '/mall/category',component:Category},
     ]
   }
 ]

@@ -36,4 +36,24 @@ public class UserServiceImp implements UserService{
         int i = userServiceMapper.updateUserOne(user);
         return 0;
     }
+
+    @Override
+    public List<User> selectAll() {
+        return userServiceMapper.selectAll();
+    }
+
+    @Override
+    public List<User> selectOnetext(Integer id, String name) {
+        return userServiceMapper.selectOnetext(id,name);
+    }
+
+    @Override
+    public int addUserTest(String name, String sex, String grade) {
+        return userServiceMapper.addUserTest(name,sex,grade);
+    }
+
+    @Override
+    public int delcateTest(Integer id) {
+        return userServiceMapper.delcateTest(id);
+    }
 }

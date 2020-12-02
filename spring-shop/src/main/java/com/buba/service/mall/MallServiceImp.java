@@ -3,6 +3,7 @@ package com.buba.service.mall;
 import com.buba.dao.MallMapper;
 import com.buba.pojo.mall.MallArea;
 import com.buba.pojo.mall.MallBrand;
+import com.buba.pojo.mall.MallCategory;
 import com.buba.utils.RespMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,4 +100,51 @@ public class MallServiceImp implements MallService {
         }
         return res;
     }
+
+    @Override
+    public HashMap getCategory(Integer currentPage, Integer pageSize) {
+        HashMap map = new HashMap();
+        ArrayList<MallCategory> list = mallMapper.getCategory();
+        List<MallCategory> oneLevel = list.stream().filter(x -> x.getFid()==0).collect(Collectors.toList());
+        List<MallCategory> twoLevel = list.stream().filter(x -> x.getFid()>=1).collect(Collectors.toList());
+        ArrayList<MallCategory> list1 = null;
+        for (MallCategory mc1:oneLevel) {
+            list1 = new ArrayList();
+            for (MallCategory mc2: twoLevel) {
+                if(mc1.getId()==mc2.getFid()){
+                    list1.add(mc2);
+                }
+                mc1.setChildren(list1);
+            }
+        }
+        map.put("data",oneLevel);
+        return map;
+    }
+
+    @Override
+    public ArrayList<MallCategory> getCateGoryflm() {
+        return mallMapper.getCateGoryflm();
+    }
+
+    @Override
+    public int addCateGory(MallCategory category) {
+        return mallMapper.addCateGory(category);
+    }
+
+    @Override
+    public int selectSon(String id) {
+        Integer i = new Integer(id);
+        return mallMapper.selectSon(i);
+    }
+
+    @Override
+    public int delCate(Integer id) {
+        return mallMapper.delCate(id);
+    }
+
+    @Override
+    public int updateCateGory(MallCategory mallCategory) {
+        return mallMapper.updateCateGory(mallCategory);
+    }
+
 }

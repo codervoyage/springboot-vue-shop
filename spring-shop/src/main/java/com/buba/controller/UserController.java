@@ -6,10 +6,7 @@ import com.buba.service.user.UserHistoryService;
 import com.buba.service.user.UserService;
 import com.buba.service.user.FeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -167,6 +164,4 @@ public class UserController {
         HashMap listMap = userHistoryService.selectOne(searchID, keyword, currentPage, pageSize);
         return listMap;
     }
-
-    
 }

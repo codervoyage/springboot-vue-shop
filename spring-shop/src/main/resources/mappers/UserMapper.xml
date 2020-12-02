@@ -45,5 +45,22 @@
 		user_state=${user.userState}
 		where user_account = #{user.userAccount}
     </update>
+    <select id="selectOnetext" resultType="user">
+        select
+        user_id,user_name,user_sex,user_grade
+        from user
+        <where>
+            <if test="id != null and id != ''">
+                user_id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and user_name like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="addUserTest">
+        insert into user (user_name,user_sex,user_grade) values (#{name},#{sex},#{grade})
+    </insert>
 
 </mapper>
