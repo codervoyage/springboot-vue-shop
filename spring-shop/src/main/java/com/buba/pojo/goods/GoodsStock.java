@@ -1,78 +1,76 @@
 package com.buba.pojo.goods;
 
-import java.util.Objects;
-
 public class GoodsStock {
-    private Integer goodsId;
-    private Double goodsSale;
-    private Double goodsAmout;
-    private String goodsPic;
+
+    private long stockId;
+    private String stockValue;
+    private double stockMoney;
+    private long stockNum;
+    private String img;
+    private long goodsId;
 
     public GoodsStock() {
     }
 
-    public GoodsStock(Integer goodsId, Double goodsSale, Double goodsAmout, String goodsPic) {
+    public GoodsStock(long stockId, String stockValue, double stockMoney, long stockNum, String img, long goodsId) {
+        this.stockId = stockId;
+        this.stockValue = stockValue;
+        this.stockMoney = stockMoney;
+        this.stockNum = stockNum;
+        this.img = img;
         this.goodsId = goodsId;
-        this.goodsSale = goodsSale;
-        this.goodsAmout = goodsAmout;
-        this.goodsPic = goodsPic;
     }
 
-    public Integer getGoodsId() {
+    public long getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(Integer goodsId) {
+    public void setGoodsId(long goodsId) {
         this.goodsId = goodsId;
     }
 
-    public Double getGoodsSale() {
-        return goodsSale;
+    public long getStockId() {
+        return stockId;
     }
 
-    public void setGoodsSale(Double goodsSale) {
-        this.goodsSale = goodsSale;
+    public void setStockId(long stockId) {
+        this.stockId = stockId;
     }
 
-    public Double getGoodsAmout() {
-        return goodsAmout;
+
+    public String getStockValue() {
+        return stockValue;
     }
 
-    public void setGoodsAmout(Double goodsAmout) {
-        this.goodsAmout = goodsAmout;
+    public void setStockValue(String stockValue) {
+        this.stockValue = stockValue;
     }
 
-    public String getGoodsPic() {
-        return goodsPic;
+
+    public double getStockMoney() {
+        return stockMoney;
     }
 
-    public void setGoodsPic(String goodsPic) {
-        this.goodsPic = goodsPic;
+    public void setStockMoney(double stockMoney) {
+        this.stockMoney = stockMoney;
     }
 
-    @Override
-    public String toString() {
-        return "GoodsStock{" +
-                "goodsId=" + goodsId +
-                ", goodsSale=" + goodsSale +
-                ", goodsAmout=" + goodsAmout +
-                ", goodsPic='" + goodsPic + '\'' +
-                '}';
+
+    public long getStockNum() {
+        return stockNum;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GoodsStock that = (GoodsStock) o;
-        return Objects.equals(goodsId, that.goodsId) &&
-                Objects.equals(goodsSale, that.goodsSale) &&
-                Objects.equals(goodsAmout, that.goodsAmout) &&
-                Objects.equals(goodsPic, that.goodsPic);
+    public void setStockNum(long stockNum) {
+        this.stockNum = stockNum;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(goodsId, goodsSale, goodsAmout, goodsPic);
+
+    public String getImg() {
+        return img;
     }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
 }

@@ -1,62 +1,74 @@
 package com.buba.pojo.goods;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
-public class GoodsComment
-{
+public class GoodsComment {
 
-  private Integer cId;
-  private Integer goodsId;
-  private Integer scoring;
-  private String text;
-  private String cImg;
-  private Date createTime;
+    private Integer cId;
+    private Integer userId;
+    private Integer goodsId;
+    private Integer scoring;
+    private String text;
+    private String cImg;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;
 
-  public Integer getcId() {
-    return cId;
-  }
 
-  public void setcId(Integer cId) {
-    this.cId = cId;
-  }
+    public Integer getUserId() {
+        return userId;
+    }
 
-  public Integer getGoodsId() {
-    return goodsId;
-  }
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-  public void setGoodsId(Integer goodsId) {
-    this.goodsId = goodsId;
-  }
+    public Integer getcId() {
+        return cId;
+    }
 
-  public Integer getScoring() {
-    return scoring;
-  }
+    public void setcId(Integer cId) {
+        this.cId = cId;
+    }
 
-  public void setScoring(Integer scoring) {
-    this.scoring = scoring;
-  }
+    public Integer getGoodsId() {
+        return goodsId;
+    }
 
-  public String getText() {
-    return text;
-  }
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
+    }
 
-  public void setText(String text) {
-    this.text = text;
-  }
+    public Integer getScoring() {
+        return scoring;
+    }
 
-  public String getcImg() {
-    return cImg;
-  }
+    public void setScoring(Integer scoring) {
+        this.scoring = scoring;
+    }
 
-  public void setcImg(String cImg) {
-    this.cImg = cImg;
-  }
+    public String getText() {
+        return text;
+    }
 
-  public Date getCreateTime() {
-    return createTime;
-  }
+    public void setText(String text) {
+        this.text = text;
+    }
 
-  public void setCreateTime(Date createTime) {
-    this.createTime = createTime;
-  }
+    public String getcImg() {
+        return cImg;
+    }
+
+    public void setcImg(String cImg) {
+        this.cImg = cImg;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }

@@ -42,7 +42,7 @@
           </el-table-column>
           <el-table-column prop="feedbackTime" label="时间">
             <template v-slot="scope">
-              {{scope.row.feedbackTime | dateFormat}}
+              {{scope.row.feedbackTime}}
             </template>
           </el-table-column>
         </el-table>

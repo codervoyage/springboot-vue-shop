@@ -2,12 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.buba.dao.GoodsMapper">
     <resultMap id="QL" type="GoodList" autoMapping="true">
-        <association property="mallBrand" javaType="com.buba.pojo.mall.MallBrand" autoMapping="true"> </association>
-        <association property="mallCategory" javaType="com.buba.pojo.mall.MallCategory" autoMapping="true"></association>
-        <collection property="goodsPropagate" javaType="List"  ofType="com.buba.pojo.goods.GoodsPropagate" autoMapping="true">
+        <association property="mallBrand" javaType="com.buba.pojo.mall.MallBrand" autoMapping="true"></association>
+        <association property="mallCategory" javaType="com.buba.pojo.mall.MallCategory"
+                     autoMapping="true"></association>
+        <collection property="goodsPropagate" javaType="List" ofType="com.buba.pojo.goods.GoodsPropagate"
+                    autoMapping="true">
         </collection>
     </resultMap>
-    <select  id="queryGoodsList" resultMap="QL">
+    <select id="queryGoodsList" resultMap="QL">
         SELECT
         *
         FROM
@@ -50,4 +52,124 @@
 
     </select>
 
+    <resultMap id="get_goods" type="com.buba.pojo.goods.Goods">
+        <id column="goods_id" property="goodsId"/>
+        <result column="num" property="num"/>
+        <result column="name" property="name"/>
+        <result column="money" property="money"/>
+        <result column="is_new" property="isNew"/>
+        <result column="is_hot" property="isHot"/>
+        <result column="is_sell" property="isSell"/>
+        <result column="images" property="images"/>
+        <result column="img" property="img"/>
+        <result column="company" property="company"/>
+        <result column="keywords" property="keywords"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="text" property="text"/>
+        <result column="detail" property="detail"/>
+        <collection property="goodsSpec" ofType="com.buba.pojo.goods.GoodsSpec">
+            <result column="p_name" property="name"/>
+            <result column="p_value" property="value"/>
+            <result column="p_img" property="img"/>
+        </collection>
+        <collection property="goodsStocks" ofType="com.buba.pojo.goods.GoodsStock">
+            <result column="stock_value" property="stockValue"/>
+            <result column="stock_money" property="stockMoney"/>
+            <result column="stock_num" property="stockNum"/>
+            <result column="s_img" property="img"/>
+        </collection>
+        <collection property="goodsParas" ofType="com.buba.pojo.goods.GoodsPara">
+            <result column="r_name" property="name"/>
+            <result column="r_value" property="value"/>
+        </collection>
+    </resultMap>
+    <select id="getGoodsList" resultMap="get_goods">
+        SELECT
+        x.*, r.`name` r_name,
+        r.`value` r_value
+        FROM
+        (
+        SELECT
+        a.*, s.stock_value,
+        s.stock_num,
+        s.stock_money,
+        s.img s_img
+        FROM
+        (
+        SELECT
+            `all`.*, p.`name` p_name,
+            p.`value` p_value,
+            p.img p_img
+        FROM
+            goods_li AS `all`
+        JOIN goods_spec AS p ON `all`.goods_id = p.goods_id
+        ) AS a
+        JOIN goods_stock AS s ON a.goods_id = s.goods_id
+        ) AS x
+        JOIN goods_para r ON x.goods_id = r.goods_id
+        <where>
+            <if test="goodsId != null and goodsId !=''">
+                x.goods_id like concat('%',#{goodsId},'%')
+            </if>
+            <if test="num != null and num !=''">
+                and x.num like concat('%',#{num},'%')
+            </if>
+            <if test="name != null and name !=''">
+                and x.`name` like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+
+
+    <!-- 商品add 添加 -->
+    <insert id="goodsAdd" parameterType="com.buba.pojo.goods.Goods">
+        insert into goods_li
+        (num,`name`,money,is_new,is_hot,is_sell,images,img,company,keywords,category_id,brand_id,text,detail)
+        values(#{num},#{name},#{money},#{isNew},#{isHot},#{isSell},#{images},#{img},#{company},#{keywords},#{categoryId},#{brandId},#{text},#{detail})
+        <selectKey keyProperty="goodsId" resultType="Integer" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <!-- 商品规格 添加 -->
+    <insert id="goodsSpecAdd" parameterType="java.util.List">
+
+        insert into goods_spec
+        (`name`,`value`,img,goods_id)
+        values
+        <foreach collection="list" item="spec" separator=",">
+            (#{spec.name},#{spec.value},#{spec.img},#{spec.goodsId})
+        </foreach>
+    </insert>
+    <!-- 商品库存 添加 -->
+    <insert id="goodsStockAdd" parameterType="list">
+        insert into goods_stock
+        (stock_value,stock_money,stock_num,img,goods_id)
+        values
+        <foreach collection="list" item="stock" separator=",">
+            (#{stock.stockValue},#{stock.stockMoney},#{stock.stockNum},#{stock.img},#{stock.goodsId})
+        </foreach>
+    </insert>
+    <!-- 商品参数 添加 -->
+    <insert id="goodsParaAdd" parameterType="list">
+        insert into goods_para
+        (`name`,`value`,goods_id)
+        values
+        <foreach collection="list" item="para" separator=",">
+            (#{para.name},#{para.value},#{para.goodsId})
+        </foreach>
+    </insert>
+
+    <!--获取商品评论All-->
+    <select id="getAllComments" resultType="goodsComment">
+        select * from goods_comment
+        <where>
+            <if test="userId != null and userId !=''">
+                and user_id like concat("%",#{userId},"%")
+            </if>
+            <if test="goodsId != null and goodsId !=''">
+                and goods_id like concat("%",#{goodsId},"%")
+            </if>
+        </where>
+    </select>
 </mapper>

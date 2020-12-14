@@ -151,7 +151,7 @@
       async getMenuList () {
         const { data } = await this.$http.get('getMenuList')
         this.menuList = data.data
-        console.log(this.menuList)
+        //console.log(this.menuList)
       },//控制左侧菜单栏是否折叠
       isCollapseSwitch () {
         this.isCollapse = !this.isCollapse
@@ -225,17 +225,14 @@
          * 否则添加path路径进去然后更改激活状态
          */
         let flag = false
-        console.log('监听到路由要跳转到' + to.path)
         for (let item of this.$store.state.openTabs) {
           if (to.path === item.path) {
             this.$store.commit('set_active_tabs', to.path)
-            console.log('openTabs中存在该路由，update_active')
             flag = true
             break
           }
         }
         if (!flag) {
-          console.log('openTabs中不存在该路由，add_update_active')
           this.$store.commit('add_tabs', {
             path: to.path,
             name: to.name

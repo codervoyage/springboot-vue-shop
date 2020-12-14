@@ -267,7 +267,6 @@
           const filterVal = ['bId', 'name', 'test', 'low']
           excel.export_json_to_excel2(tHeader, this.tableData, filterVal, '品牌制造商信息')
         })
-
       }
     }
   }

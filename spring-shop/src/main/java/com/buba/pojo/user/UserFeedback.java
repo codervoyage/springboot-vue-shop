@@ -1,65 +1,71 @@
 package com.buba.pojo.user;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class UserFeedback {
 
-  private Integer id;
-  private Integer uid;
-  private String feedbackContent;
-  private String feedbackPicture;
-  private String feedbackTime;
+    private Integer id;
+    private Integer uid;
+    private String feedbackContent;
+    private String feedbackPicture;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date feedbackTime;
 
-  private User user;
+    private User user;
 
-  public long getId() {
-    return id;
-  }
+    public long getId() {
+        return id;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public Date getFeedbackTime() {
+        return feedbackTime;
+    }
 
-  public long getUid() {
-    return uid;
-  }
+    public void setFeedbackTime(Date feedbackTime) {
+        this.feedbackTime = feedbackTime;
+    }
 
-  public void setUid(Integer uid) {
-    this.uid = uid;
-  }
+    public long getUid() {
+        return uid;
+    }
 
-
-  public String getFeedbackContent() {
-    return feedbackContent;
-  }
-
-  public void setFeedbackContent(String feedbackContent) {
-    this.feedbackContent = feedbackContent;
-  }
-
-
-  public String getFeedbackPicture() {
-    return feedbackPicture;
-  }
-
-  public void setFeedbackPicture(String feedbackPicture) {
-    this.feedbackPicture = feedbackPicture;
-  }
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
 
 
-  public String getFeedbackTime() {
-    return feedbackTime;
-  }
+    public String getFeedbackContent() {
+        return feedbackContent;
+    }
 
-  public void setFeedbackTime(String feedbackTime) {
-    this.feedbackTime = feedbackTime;
-  }
+    public void setFeedbackContent(String feedbackContent) {
+        this.feedbackContent = feedbackContent;
+    }
 
-  public User getUser() {
-    return user;
-  }
 
-  public void setUser(User user) {
-    this.user = user;
-  }
+    public String getFeedbackPicture() {
+        return feedbackPicture;
+    }
+
+    public void setFeedbackPicture(String feedbackPicture) {
+        this.feedbackPicture = feedbackPicture;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -1,9 +1,15 @@
 package com.buba.service.goods;
 
+import com.buba.pojo.goods.Goods;
+
 import java.util.HashMap;
 
 public interface GoodsService {
-    HashMap queryGoodsList(String goodsId,String goodsName,String classificId,Integer currentPage,Integer pageSize);
+    HashMap getAllComments(Integer userId, Integer goodsId, Integer pageNum, Integer pageSize);
 
-    HashMap deleteGoods(Integer id);
+    HashMap delById(Integer id);
+
+    HashMap goodsAdd(Goods goods);
+
+    HashMap getGoodsList(String goodsId, String num, String name, Integer currentPage, Integer pageSize);
 }

@@ -191,9 +191,7 @@ export default {
     //获取列表栏数据
     async getTable () {
       const { data } = await this.$http.get('/mall/category')
-      var list = data.data
-      this.tableData = list
-      console.log(list)
+      this.tableData = data.data
     },
     //添加
     selectflm(){
@@ -247,6 +245,7 @@ export default {
       const { data } = await this.$http.post("/mall/category/addCateGory",this.dialogFrom)
       if (data==1){
         this.dialog=false
+
         this.$message.success("添加成功！")
         this.getTable()
       }else{

@@ -1,66 +1,66 @@
 package com.buba.pojo.goods;
 
-import java.util.Objects;
-
 public class GoodsSpec {
-    private Integer goodsId;
-    private String goodsColor;
-    private String goods_size;
 
-    public GoodsSpec(Integer goodsId, String goodsColor, String goods_size) {
-        this.goodsId = goodsId;
-        this.goodsColor = goodsColor;
-        this.goods_size = goods_size;
-    }
+  private long specId;
+  private String name;
+  private String value;
+  private String img;
+  private long goodsId;
 
-    public GoodsSpec() {
-    }
+  public GoodsSpec() {
+  }
 
-    public Integer getGoodsId() {
-        return goodsId;
-    }
+  public GoodsSpec(long specId, String name, String value, String img, long goodsId) {
+    this.specId = specId;
+    this.name = name;
+    this.value = value;
+    this.img = img;
+    this.goodsId = goodsId;
+  }
 
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
-    }
+  public long getSpecId() {
+    return specId;
+  }
 
-    public String getGoodsColor() {
-        return goodsColor;
-    }
+  public void setSpecId(long specId) {
+    this.specId = specId;
+  }
 
-    public void setGoodsColor(String goodsColor) {
-        this.goodsColor = goodsColor;
-    }
 
-    public String getGoods_size() {
-        return goods_size;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setGoods_size(String goods_size) {
-        this.goods_size = goods_size;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    @Override
-    public String toString() {
-        return "GoodsSpec{" +
-                "goodsId=" + goodsId +
-                ", goodsColor='" + goodsColor + '\'' +
-                ", goods_size='" + goods_size + '\'' +
-                '}';
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GoodsSpec goodsSpec = (GoodsSpec) o;
-        return Objects.equals(goodsId, goodsSpec.goodsId) &&
-                Objects.equals(goodsColor, goodsSpec.goodsColor) &&
-                Objects.equals(goods_size, goodsSpec.goods_size);
-    }
+  public String getValue() {
+    return value;
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(goodsId, goodsColor, goods_size);
-    }
+  public void setValue(String value) {
+    this.value = value;
+  }
+
+
+  public String getImg() {
+    return img;
+  }
+
+  public void setImg(String img) {
+    this.img = img;
+  }
+
+
+  public long getGoodsId() {
+    return goodsId;
+  }
+
+  public void setGoodsId(long goodsId) {
+    this.goodsId = goodsId;
+  }
+
 }
